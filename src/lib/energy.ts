@@ -159,6 +159,7 @@ export async function getVentilationDistribution(): Promise<VentilationDistribut
 
 // Get recommended measures for a BRF or all BRFs
 export async function getRecommendedMeasures(zeldaId?: string): Promise<RecommendedMeasure[]> {
+    // Map known low-cost measure types to sensible defaults when cost_factor is NULL
     const sql = `
         SELECT 
             rm.zelda_id,
@@ -168,9 +169,17 @@ export async function getRecommendedMeasures(zeldaId?: string): Promise<Recommen
             rm.estimated_energy_reduction_kwh,
             rm.estimated_cost_factor,
             CASE 
-                WHEN rm.estimated_cost_factor < 0.5 THEN 'Låg'
-                WHEN rm.estimated_cost_factor < 1.0 THEN 'Medel'
-                ELSE 'Hög'
+                -- Known low-cost measures (adjustments, tuning, LED, etc.)
+                WHEN rm.measure_type IN ('AtgForslagJustVarme', 'AtgForslagStyrVarme', 'AtgForslagRengVarme', 
+                    'AtgForslagJustVent', 'AtgForslagTidstyrVent', 'AtgForslagStyrBelys', 
+                    'AtgForslagEffektivBelys', 'AtgForslagNyGivare', 'AtgForslagSparaVatten') 
+                    AND (rm.estimated_cost_factor IS NULL OR rm.estimated_cost_factor > 1.0) THEN 'Låg'
+                -- Use actual value if available
+                WHEN rm.estimated_cost_factor IS NOT NULL AND rm.estimated_cost_factor < 0.5 THEN 'Låg'
+                WHEN rm.estimated_cost_factor IS NOT NULL AND rm.estimated_cost_factor < 1.0 THEN 'Medel'
+                WHEN rm.estimated_cost_factor IS NOT NULL THEN 'Hög'
+                -- Default to Medel for unknown NULL cases
+                ELSE 'Medel'
             END as investment_level
         FROM brf_recommended_measures rm
         JOIN brf_metadata m ON rm.zelda_id = m.zelda_id

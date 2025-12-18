@@ -355,13 +355,31 @@ export async function getBrfFullDetail(zeldaId: string): Promise<BrfFullDetail |
             heat_pump_exhaust: energyDecl.heat_pump_exhaust ? parseInt(energyDecl.heat_pump_exhaust) : null,
             valid_until: energyDecl.valid_until
         } : null,
-        recommended_measures: measuresResult.rows.map((m: any) => ({
-            measure_type: m.measure_type,
-            measure_name: m.measure_name,
-            estimated_energy_reduction_kwh: m.estimated_energy_reduction_kwh ? parseInt(m.estimated_energy_reduction_kwh) : null,
-            estimated_cost_factor: m.estimated_cost_factor ? parseFloat(m.estimated_cost_factor) : null,
-            investment_level: (m.estimated_cost_factor < 0.5 ? 'Låg' : m.estimated_cost_factor < 1.0 ? 'Medel' : 'Hög') as 'Låg' | 'Medel' | 'Hög'
-        })),
+        recommended_measures: measuresResult.rows.map((m: any) => {
+            const costFactor = m.estimated_cost_factor ? parseFloat(m.estimated_cost_factor) : null;
+            const lowCostMeasureTypes = ['AtgForslagJustVarme', 'AtgForslagStyrVarme', 'AtgForslagRengVarme',
+                'AtgForslagJustVent', 'AtgForslagTidstyrVent', 'AtgForslagStyrBelys',
+                'AtgForslagEffektivBelys', 'AtgForslagNyGivare', 'AtgForslagSparaVatten'];
+
+            let investment_level: 'Låg' | 'Medel' | 'Hög' = 'Medel';
+            if (lowCostMeasureTypes.includes(m.measure_type) && (costFactor === null || costFactor > 1.0)) {
+                investment_level = 'Låg';
+            } else if (costFactor !== null && costFactor < 0.5) {
+                investment_level = 'Låg';
+            } else if (costFactor !== null && costFactor < 1.0) {
+                investment_level = 'Medel';
+            } else if (costFactor !== null) {
+                investment_level = 'Hög';
+            }
+
+            return {
+                measure_type: m.measure_type,
+                measure_name: m.measure_name,
+                estimated_energy_reduction_kwh: m.estimated_energy_reduction_kwh ? parseInt(m.estimated_energy_reduction_kwh) : null,
+                estimated_cost_factor: costFactor,
+                investment_level
+            };
+        }),
         percentiles: {
             solidarity: pct.solidarity_pct ? Math.round((1 - parseFloat(pct.solidarity_pct)) * 100) : null,
             debt_per_sqm: pct.debt_pct ? Math.round((1 - parseFloat(pct.debt_pct)) * 100) : null
