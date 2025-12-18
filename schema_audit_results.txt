@@ -1,0 +1,904 @@
+🔍 COMPREHENSIVE DATABASE SCHEMA AUDIT
+
+================================================================================
+
+Found 29 tables:
+brf, brf_accounting_principles, brf_balance_sheet, brf_board_members, brf_building_assets, brf_cash_flow, brf_complete, brf_depreciation_detail, brf_events, brf_fees, brf_governance, brf_income_statement, brf_loans, brf_metadata, brf_metrics, brf_multi_year, brf_note_line_items, brf_notes, brf_operating_costs_detail, brf_operational_costs, brf_overview, brf_personnel_costs, brf_profit_treatment, brf_property, brf_repairs_detail, brf_revenue_breakdown, brf_suppliers, buildings, multi_year
+
+================================================================================
+
+📋 TABLE: brf
+--------------------------------------------------------------------------------
+Columns (2):
+
+  ✓ zelda_id: character varying(20)
+  ✓ created_at?: timestamp without time zone
+
+Sample data (2 rows):
+{
+  "zelda_id": "82997",
+  "created_at": "2025-12-16T09:50:43.258Z"
+}...
+
+
+📋 TABLE: brf_accounting_principles
+--------------------------------------------------------------------------------
+Columns (5):
+
+  ✓ zelda_id: character varying(20)
+  ✓ accounting_standard?: character varying(10)
+  ✓ depreciation_method?: character varying(50)
+  ✓ depreciation_period_buildings_years?: integer
+  ✓ maintenance_fund_accounting?: text
+
+Sample data (2 rows):
+{
+  "zelda_id": "82997",
+  "accounting_standard": "K2",
+  "depreciation_method": "linjär",
+  "depreciation_period_buildings_years": 100,
+  "maintenance_fund_accounting": "Avsättning till fonden sker genom årlig omföring mellan fritt och bundet eget kapital. Ianspråktagande sker på omvänt vis. Reservering sker utifrån föreningens underhållsplan."
+}...
+
+
+📋 TABLE: brf_balance_sheet
+--------------------------------------------------------------------------------
+Columns (12):
+
+  ✓ zelda_id: character varying(20)
+  ✓ assets_total?: bigint
+  ✓ fixed_assets?: bigint
+  ✓ fixed_assets_buildings?: bigint
+  ✓ current_assets?: bigint
+  ✓ cash_and_bank?: bigint
+  ✓ equity_total?: bigint
+  ✓ equity_restricted?: bigint
+  ✓ equity_unrestricted?: bigint
+  ✓ long_term_liabilities?: bigint
+  ✓ short_term_liabilities?: bigint
+  ✓ liabilities_credit_institutions?: bigint
+
+Sample data (2 rows):
+{
+  "zelda_id": "82997",
+  "assets_total": "201201132",
+  "fixed_assets": "196669362",
+  "fixed_assets_buildings": "193189692",
+  "current_assets": "4531770",
+  "cash_and_bank": "4182906",
+  "equity_total": "151224688",
+  "equity_restricted": "157832916",
+  "equity_unrestricted": "-6608228",
+  "long_term_liabilities": "22100259",
+  "short_term_liabilities": "27876185",
+  "liabilities_credit_institutions": "48429334"
+}...
+
+
+📋 TABLE: brf_board_members
+--------------------------------------------------------------------------------
+Columns (4):
+
+  ✓ id: integer
+  ✓ zelda_id?: character varying(20)
+  ✓ full_name?: character varying(200)
+  ✓ role?: character varying(50)
+
+Sample data (2 rows):
+{
+  "id": 1,
+  "zelda_id": "82997",
+  "full_name": "Jacomina Beertema",
+  "role": "ordförande"
+}...
+
+
+📋 TABLE: brf_building_assets
+--------------------------------------------------------------------------------
+Columns (5):
+
+  ✓ id: integer
+  ✓ zelda_id?: character varying(20)
+  ✓ category?: character varying(200)
+  ✓ amount_current?: bigint
+  ✓ amount_previous?: bigint
+
+Sample data (2 rows):
+{
+  "id": 1,
+  "zelda_id": "82997",
+  "category": "Ingående anskaffningsvärde",
+  "amount_current": "178658406",
+  "amount_previous": "178456024"
+}...
+
+
+📋 TABLE: brf_cash_flow
+--------------------------------------------------------------------------------
+Columns (7):
+
+  ✓ zelda_id: character varying(20)
+  ✓ operating_activities?: bigint
+  ✓ investing_activities?: bigint
+  ✓ financing_activities?: bigint
+  ✓ cash_flow_total?: bigint
+  ✓ opening_cash?: bigint
+  ✓ closing_cash?: bigint
+
+Sample data (2 rows):
+{
+  "zelda_id": "82997",
+  "operating_activities": "1997535",
+  "investing_activities": "-575455",
+  "financing_activities": "-600000",
+  "cash_flow_total": "822080",
+  "opening_cash": "3376051",
+  "closing_cash": "4182906"
+}...
+
+
+📋 TABLE: brf_complete
+--------------------------------------------------------------------------------
+Columns (32):
+
+  ✓ zelda_id?: character varying(20)
+  ✓ brf_name?: character varying(255)
+  ✓ organization_number?: character varying(20)
+  ✓ fiscal_year?: integer
+  ✓ address?: character varying(500)
+  ✓ city?: character varying(100)
+  ✓ fastighetsbeteckning?: character varying(255)
+  ✓ built_year?: integer
+  ✓ total_apartments?: integer
+  ✓ total_area_sqm?: numeric
+  ✓ heating_type?: character varying(100)
+  ✓ latitude?: numeric
+  ✓ longitude?: numeric
+  ✓ energy_class?: character varying(5)
+  ✓ energy_performance_kwh_sqm?: integer
+  ✓ building_atemp_sqm?: numeric
+  ✓ fjarrvarme_kwh?: integer
+  ✓ building_year?: integer
+  ✓ building_height?: numeric
+  ✓ assets_total?: bigint
+  ✓ equity_total?: bigint
+  ✓ long_term_liabilities?: bigint
+  ✓ result_after_tax?: bigint
+  ✓ solidarity_percent?: numeric
+  ✓ debt_per_sqm_total?: numeric
+  ✓ electricity_cost?: bigint
+  ✓ heating_cost?: bigint
+  ✓ water_cost?: bigint
+  ✓ insurance_cost?: bigint
+  ✓ total_operational_costs?: bigint
+  ✓ chairman?: character varying(200)
+  ✓ board_size?: integer
+
+Sample data (2 rows):
+{
+  "zelda_id": "198532",
+  "brf_name": "Bostadsrättsföreningen Björk och Plaza",
+  "organization_number": "769629-0134",
+  "fiscal_year": 2021,
+  "address": null,
+  "city": "Stockholm",
+  "fastighetsbeteckning": "Sonfjället 2",
+  "built_year": 2015,
+  "total_apartments": 94,
+  "total_area_sqm": "8009.00",
+  "heating_type": "fjärrvärme",
+  "latitude": null,
+  "longitude": null,
+  "energy_class": "C",
+  "energy_performance_kwh_sqm": 82,
+  "building_atemp_sqm": "10488.00",
+  "fjarrvarme_kwh": 0,
+ ...
+
+
+📋 TABLE: brf_depreciation_detail
+--------------------------------------------------------------------------------
+Columns (7):
+
+  ✓ id: integer
+  ✓ zelda_id?: character varying(20)
+  ✓ asset_type?: character varying(200)
+  ✓ acquisition_value?: bigint
+  ✓ accumulated_depreciation?: bigint
+  ✓ book_value?: bigint
+  ✓ depreciation_current_year?: bigint
+
+
+📋 TABLE: brf_events
+--------------------------------------------------------------------------------
+Columns (6):
+
+  ✓ id: integer
+  ✓ zelda_id?: character varying(20)
+  ✓ event_type?: character varying(50)
+  ✓ description?: text
+  ✓ event_date?: date
+  ✓ financial_impact?: bigint
+
+Sample data (2 rows):
+{
+  "id": 1,
+  "zelda_id": "82997",
+  "event_type": "fee_increase",
+  "description": "Månadsavgifterna höjdes med 15% från 2023-01-01 på grund av inflationsdrivna kostnadsökningar och räntehöjningar",
+  "event_date": "2022-12-31T23:00:00.000Z",
+  "financial_impact": null
+}...
+
+
+📋 TABLE: brf_fees
+--------------------------------------------------------------------------------
+Columns (10):
+
+  ✓ zelda_id: character varying(20)
+  ✓ arsavgift_per_sqm_total?: numeric
+  ✓ arsavgift_per_apartment_avg?: numeric
+  ✓ inkluderar_vatten?: boolean
+  ✓ inkluderar_uppvarmning?: boolean
+  ✓ inkluderar_el?: boolean
+  ✓ inkluderar_bredband?: boolean
+  ✓ last_fee_increase_date?: date
+  ✓ last_fee_increase_percentage?: numeric
+  ✓ planned_fee_changes?: text
+
+Sample data (2 rows):
+{
+  "zelda_id": "82997",
+  "arsavgift_per_sqm_total": "716.00",
+  "arsavgift_per_apartment_avg": null,
+  "inkluderar_vatten": true,
+  "inkluderar_uppvarmning": true,
+  "inkluderar_el": false,
+  "inkluderar_bredband": true,
+  "last_fee_increase_date": "2022-12-31T23:00:00.000Z",
+  "last_fee_increase_percentage": "15.00",
+  "planned_fee_changes": "Avgiftshöjning med 23% per 2024-04-01"
+}...
+
+
+📋 TABLE: brf_governance
+--------------------------------------------------------------------------------
+Columns (11):
+
+  ✓ zelda_id: character varying(20)
+  ✓ chairman?: character varying(200)
+  ✓ vice_chairman?: character varying(200)
+  ✓ board_size?: integer
+  ✓ annual_meeting_date?: date
+  ✓ antal_styrelsemoten?: integer
+  ✓ primary_auditor_name?: character varying(200)
+  ✓ primary_auditor_firm?: character varying(200)
+  ✓ primary_auditor_certification?: character varying(50)
+  ✓ deputy_auditor_name?: character varying(200)
+  ✓ deputy_auditor_firm?: character varying(200)
+
+Sample data (2 rows):
+{
+  "zelda_id": "82997",
+  "chairman": "Jacomina Beertema",
+  "vice_chairman": "Kristina Kjellander",
+  "board_size": 7,
+  "annual_meeting_date": "2023-06-06T22:00:00.000Z",
+  "antal_styrelsemoten": 12,
+  "primary_auditor_name": "Eeva-Riitta Salminen",
+  "primary_auditor_firm": "BoRevision AB",
+  "primary_auditor_certification": "auktoriserad",
+  "deputy_auditor_name": "Thomas Wärme",
+  "deputy_auditor_firm": null
+}...
+
+
+📋 TABLE: brf_income_statement
+--------------------------------------------------------------------------------
+Columns (16):
+
+  ✓ zelda_id: character varying(20)
+  ✓ revenue_total?: bigint
+  ✓ revenue_apartment_fees?: bigint
+  ✓ revenue_commercial_rent?: bigint
+  ✓ revenue_parking?: bigint
+  ✓ revenue_other?: bigint
+  ✓ expenses_total?: bigint
+  ✓ expenses_operations?: bigint
+  ✓ expenses_maintenance?: bigint
+  ✓ depreciation_total?: bigint
+  ✓ operating_result?: bigint
+  ✓ financial_income?: bigint
+  ✓ financial_expenses?: bigint
+  ✓ result_before_tax?: bigint
+  ✓ tax?: bigint
+  ✓ result_after_tax?: bigint
+
+Sample data (2 rows):
+{
+  "zelda_id": "82997",
+  "revenue_total": "5495513",
+  "revenue_apartment_fees": "4665780",
+  "revenue_commercial_rent": null,
+  "revenue_parking": "600875",
+  "revenue_other": "228858",
+  "expenses_total": "-4823689",
+  "expenses_operations": "-2431145",
+  "expenses_maintenance": "-312363",
+  "depreciation_total": "-2008513",
+  "operating_result": "671824",
+  "financial_income": "53507",
+  "financial_expenses": "-1005393",
+  "result_before_tax": "-280062",
+  "tax": "0",
+  "result_after_tax": ...
+
+
+📋 TABLE: brf_loans
+--------------------------------------------------------------------------------
+Columns (9):
+
+  ✓ id: integer
+  ✓ zelda_id?: character varying(20)
+  ✓ lender?: character varying(100)
+  ✓ original_amount?: bigint
+  ✓ outstanding_balance?: bigint
+  ✓ interest_rate?: numeric
+  ✓ interest_type?: character varying(20)
+  ✓ maturity_date?: date
+  ✓ villkorsandringsdag?: date
+
+Sample data (2 rows):
+{
+  "id": 1,
+  "zelda_id": "82997",
+  "lender": "Stadshypotek AB",
+  "original_amount": null,
+  "outstanding_balance": "12917257",
+  "interest_rate": "0.450",
+  "interest_type": "fast",
+  "maturity_date": null,
+  "villkorsandringsdag": "2024-03-29T23:00:00.000Z"
+}...
+
+
+📋 TABLE: brf_metadata
+--------------------------------------------------------------------------------
+Columns (8):
+
+  ✓ zelda_id: character varying(20)
+  ✓ brf_name?: character varying(255)
+  ✓ organization_number?: character varying(20)
+  ✓ fiscal_year?: integer
+  ✓ fiscal_year_start?: date
+  ✓ fiscal_year_end?: date
+  ✓ registration_date?: date
+  ✓ report_date?: date
+
+Sample data (2 rows):
+{
+  "zelda_id": "82997",
+  "brf_name": "Brf Olympia",
+  "organization_number": "769602-1505",
+  "fiscal_year": 2023,
+  "fiscal_year_start": "2022-12-31T23:00:00.000Z",
+  "fiscal_year_end": "2023-12-30T23:00:00.000Z",
+  "registration_date": "1997-04-10T22:00:00.000Z",
+  "report_date": null
+}...
+
+
+📋 TABLE: brf_metrics
+--------------------------------------------------------------------------------
+Columns (7):
+
+  ✓ zelda_id: character varying(20)
+  ✓ solidarity_percent?: numeric
+  ✓ debt_per_sqm_total?: numeric
+  ✓ debt_per_sqm_residential?: numeric
+  ✓ annual_fee_per_sqm?: numeric
+  ✓ total_debt?: bigint
+  ✓ average_interest_rate?: numeric
+
+Sample data (2 rows):
+{
+  "zelda_id": "82997",
+  "solidarity_percent": "75.20",
+  "debt_per_sqm_total": "6358.00",
+  "debt_per_sqm_residential": "7294.00",
+  "annual_fee_per_sqm": "716.00",
+  "total_debt": "48429334",
+  "average_interest_rate": "2.000"
+}...
+
+
+📋 TABLE: brf_multi_year
+--------------------------------------------------------------------------------
+Columns (22):
+
+  ✓ id: integer
+  ✓ zelda_id?: character varying(20)
+  ✓ year?: integer
+  ✓ nettoomsattning?: bigint
+  ✓ resultat_efter_fin_poster?: bigint
+  ✓ arsresultat?: bigint
+  ✓ tillgangar?: bigint
+  ✓ eget_kapital?: bigint
+  ✓ soliditet_procent?: numeric
+  ✓ skuldsattning_per_kvm_bostadsratt?: numeric
+  ✓ skuldsattning_per_kvm_totalyta?: numeric
+  ✓ arsavgift_per_kvm?: numeric
+  ✓ energikostnad_per_kvm?: numeric
+  ✓ varmekostnad_per_kvm?: numeric
+  ✓ vattenkostnad_per_kvm?: numeric
+  ✓ driftskostnad_per_kvm?: numeric
+  ✓ underhallskostnad_per_kvm?: numeric
+  ✓ sparande_per_kvm?: numeric
+  ✓ avsattning_yttre_fond?: bigint
+  ✓ yttre_fond?: bigint
+  ✓ genomsnittlig_skuldranra_procent?: numeric
+  ✓ lan_per_kvm?: numeric
+
+Sample data (2 rows):
+{
+  "id": 1,
+  "zelda_id": "52831",
+  "year": 2022,
+  "nettoomsattning": "2873000",
+  "resultat_efter_fin_poster": "-499000",
+  "arsresultat": "-499007",
+  "tillgangar": "126777006",
+  "eget_kapital": "111325108",
+  "soliditet_procent": "87.80",
+  "skuldsattning_per_kvm_bostadsratt": null,
+  "skuldsattning_per_kvm_totalyta": null,
+  "arsavgift_per_kvm": null,
+  "energikostnad_per_kvm": null,
+  "varmekostnad_per_kvm": null,
+  "vattenkostnad_per_kvm": null,
+  "driftskostnad_per_kvm": null,
+  "unde...
+
+
+📋 TABLE: brf_note_line_items
+--------------------------------------------------------------------------------
+Columns (6):
+
+  ✓ id: integer
+  ✓ note_id?: integer
+  ✓ zelda_id?: character varying(20)
+  ✓ description?: text
+  ✓ amount_current?: bigint
+  ✓ amount_previous?: bigint
+
+Sample data (2 rows):
+{
+  "id": 1,
+  "note_id": 2,
+  "zelda_id": "82997",
+  "description": "Årsavgifter bostäder",
+  "amount_current": "4665780",
+  "amount_previous": "4057248"
+}...
+
+
+📋 TABLE: brf_notes
+--------------------------------------------------------------------------------
+Columns (5):
+
+  ✓ id: integer
+  ✓ zelda_id?: character varying(20)
+  ✓ note_number?: integer
+  ✓ title?: character varying(255)
+  ✓ content?: text
+
+Sample data (2 rows):
+{
+  "id": 1,
+  "zelda_id": "82997",
+  "note_number": 1,
+  "title": "Redovisningsprinciper",
+  "content": "Årsredovisningen är upprättad enligt årsredovisningslagen och BFNAR 2016:10. Byggnader skrivs av på 100 år, maskiner och inventarier på 5 år. Licensavtal fjärrvärme skrivs av på 20 år."
+}...
+
+
+📋 TABLE: brf_operating_costs_detail
+--------------------------------------------------------------------------------
+Columns (5):
+
+  ✓ id: integer
+  ✓ zelda_id?: character varying(20)
+  ✓ category?: character varying(200)
+  ✓ amount_current?: bigint
+  ✓ amount_previous?: bigint
+
+Sample data (2 rows):
+{
+  "id": 1,
+  "zelda_id": "82997",
+  "category": "Löpande underhåll",
+  "amount_current": "234832",
+  "amount_previous": "310165"
+}...
+
+
+📋 TABLE: brf_operational_costs
+--------------------------------------------------------------------------------
+Columns (15):
+
+  ✓ zelda_id: character varying(20)
+  ✓ electricity_cost?: bigint
+  ✓ heating_cost?: bigint
+  ✓ water_cost?: bigint
+  ✓ insurance_cost?: bigint
+  ✓ property_tax?: bigint
+  ✓ management_fee?: bigint
+  ✓ maintenance_cost?: bigint
+  ✓ repairs_cost?: bigint
+  ✓ waste_management_cost?: bigint
+  ✓ cleaning_cost?: bigint
+  ✓ elevator_cost?: bigint
+  ✓ site_leasehold_fee?: bigint
+  ✓ other_costs?: bigint
+  ✓ total_operational_costs?: bigint
+
+Sample data (2 rows):
+{
+  "zelda_id": "82997",
+  "electricity_cost": "267678",
+  "heating_cost": "454243",
+  "water_cost": "186133",
+  "insurance_cost": "75862",
+  "property_tax": "153437",
+  "management_fee": null,
+  "maintenance_cost": "312363",
+  "repairs_cost": "234832",
+  "waste_management_cost": "64195",
+  "cleaning_cost": null,
+  "elevator_cost": null,
+  "site_leasehold_fee": "0",
+  "other_costs": null,
+  "total_operational_costs": "2431144"
+}...
+
+
+📋 TABLE: brf_overview
+--------------------------------------------------------------------------------
+Columns (42):
+
+  ✓ zelda_id: character varying(20)
+  ✓ brf_name?: character varying(255)
+  ✓ org_number?: character varying(20)
+  ✓ fiscal_year?: integer
+  ✓ address?: character varying(255)
+  ✓ postal_code?: character varying(10)
+  ✓ city?: character varying(100)
+  ✓ municipality?: character varying(100)
+  ✓ built_year?: integer
+  ✓ total_apartments?: integer
+  ✓ total_area_sqm?: numeric
+  ✓ living_area_sqm?: numeric
+  ✓ commercial_area_sqm?: numeric
+  ✓ number_of_buildings?: integer
+  ✓ number_of_floors?: integer
+  ✓ heating_type?: character varying(50)
+  ✓ energy_class?: character varying(5)
+  ✓ energy_kwh_per_sqm?: numeric
+  ✓ land_ownership?: character varying(20)
+  ✓ chairman?: character varying(100)
+  ✓ board_size?: integer
+  ✓ revenue_total?: bigint
+  ✓ expenses_total?: bigint
+  ✓ operating_result?: bigint
+  ✓ result_after_tax?: bigint
+  ✓ assets_total?: bigint
+  ✓ equity_total?: bigint
+  ✓ long_term_liabilities?: bigint
+  ✓ short_term_liabilities?: bigint
+  ✓ cash_and_bank?: bigint
+  ✓ solidarity_percent?: numeric
+  ✓ debt_per_sqm?: numeric
+  ✓ annual_fee_per_sqm?: numeric
+  ✓ average_interest_rate?: numeric
+  ✓ num_loans?: integer
+  ✓ num_board_members?: integer
+  ✓ num_notes?: integer
+  ✓ num_events?: integer
+  ✓ created_at?: timestamp without time zone
+  ✓ latitude?: numeric
+  ✓ longitude?: numeric
+  ✓ area?: character varying(50)
+
+Sample data (2 rows):
+{
+  "zelda_id": "82997",
+  "brf_name": "Brf Olympia",
+  "org_number": "769602-1505",
+  "fiscal_year": 2023,
+  "address": "Babordsgatan 12-14 och Korphoppsgatan 25-29",
+  "postal_code": null,
+  "city": "Stockholm",
+  "municipality": null,
+  "built_year": 2002,
+  "total_apartments": 73,
+  "total_area_sqm": "7617.00",
+  "living_area_sqm": null,
+  "commercial_area_sqm": null,
+  "number_of_buildings": null,
+  "number_of_floors": null,
+  "heating_type": "fjärrvärme",
+  "energy_class": null,
+  "energy_...
+
+
+📋 TABLE: brf_personnel_costs
+--------------------------------------------------------------------------------
+Columns (5):
+
+  ✓ id: integer
+  ✓ zelda_id?: character varying(20)
+  ✓ category?: character varying(200)
+  ✓ amount_current?: bigint
+  ✓ amount_previous?: bigint
+
+Sample data (2 rows):
+{
+  "id": 1,
+  "zelda_id": "82997",
+  "category": "Arvoden till styrelsen",
+  "amount_current": "105000",
+  "amount_previous": "94600"
+}...
+
+
+📋 TABLE: brf_profit_treatment
+--------------------------------------------------------------------------------
+Columns (7):
+
+  ✓ zelda_id: character varying(20)
+  ✓ balanserat_resultat?: bigint
+  ✓ result_for_year?: bigint
+  ✓ total_available?: bigint
+  ✓ allocation_to_maintenance_fund?: bigint
+  ✓ allocation_to_balanserad_vinst?: bigint
+  ✓ board_proposal_text?: text
+
+Sample data (2 rows):
+{
+  "zelda_id": "82997",
+  "balanserat_resultat": "-6328166",
+  "result_for_year": "-280062",
+  "total_available": "-6608228",
+  "allocation_to_maintenance_fund": null,
+  "allocation_to_balanserad_vinst": "-6608228",
+  "board_proposal_text": "Styrelsen föreslår att den ansamlade förlusten i ny räkning överföres"
+}...
+
+
+📋 TABLE: brf_property
+--------------------------------------------------------------------------------
+Columns (30):
+
+  ✓ zelda_id: character varying(20)
+  ✓ property_designation?: character varying(255)
+  ✓ address?: character varying(500)
+  ✓ postal_code?: character varying(10)
+  ✓ city?: character varying(100)
+  ✓ municipality?: character varying(100)
+  ✓ built_year?: integer
+  ✓ vardear?: integer
+  ✓ total_area_sqm?: numeric
+  ✓ living_area_sqm?: numeric
+  ✓ commercial_area_sqm?: numeric
+  ✓ total_apartments?: integer
+  ✓ number_of_commercial_units?: integer
+  ✓ number_of_buildings?: integer
+  ✓ number_of_floors?: integer
+  ✓ heating_type?: character varying(100)
+  ✓ energy_class?: character varying(5)
+  ✓ energy_performance_kwh_sqm_year?: numeric
+  ✓ is_akta_brf?: boolean
+  ✓ land_ownership_type?: character varying(50)
+  ✓ land_lease?: boolean
+  ✓ insurance_provider?: character varying(200)
+  ✓ apt_one_room?: integer
+  ✓ apt_two_rooms?: integer
+  ✓ apt_three_rooms?: integer
+  ✓ apt_four_rooms?: integer
+  ✓ apt_five_plus_rooms?: integer
+  ✓ latitude?: numeric
+  ✓ longitude?: numeric
+  ✓ area?: character varying(100)
+
+Sample data (2 rows):
+{
+  "zelda_id": "82997",
+  "property_designation": "Holmen 1",
+  "address": "Babordsgatan 12-14 och Korphoppsgatan 25-29",
+  "postal_code": null,
+  "city": "Stockholm",
+  "municipality": "Stockholm",
+  "built_year": 2002,
+  "vardear": null,
+  "total_area_sqm": "7617.00",
+  "living_area_sqm": "6640.00",
+  "commercial_area_sqm": "977.00",
+  "total_apartments": 73,
+  "number_of_commercial_units": null,
+  "number_of_buildings": 3,
+  "number_of_floors": null,
+  "heating_type": "fjärrvärme",
+  "energy...
+
+
+📋 TABLE: brf_repairs_detail
+--------------------------------------------------------------------------------
+Columns (5):
+
+  ✓ id: integer
+  ✓ zelda_id?: character varying(20)
+  ✓ category?: character varying(200)
+  ✓ amount_current?: bigint
+  ✓ amount_previous?: bigint
+
+Sample data (2 rows):
+{
+  "id": 1,
+  "zelda_id": "278485",
+  "category": "Reparationer",
+  "amount_current": "799",
+  "amount_previous": "7757"
+}...
+
+
+📋 TABLE: brf_revenue_breakdown
+--------------------------------------------------------------------------------
+Columns (5):
+
+  ✓ id: integer
+  ✓ zelda_id?: character varying(20)
+  ✓ category?: character varying(200)
+  ✓ amount_current?: bigint
+  ✓ amount_previous?: bigint
+
+Sample data (2 rows):
+{
+  "id": 1,
+  "zelda_id": "82997",
+  "category": "Årsavgifter bostäder",
+  "amount_current": "4665780",
+  "amount_previous": "4057248"
+}...
+
+
+📋 TABLE: brf_suppliers
+--------------------------------------------------------------------------------
+Columns (6):
+
+  ✓ id: integer
+  ✓ zelda_id?: character varying(20)
+  ✓ supplier_name?: character varying(255)
+  ✓ supplier_type?: character varying(100)
+  ✓ amount?: bigint
+  ✓ description?: text
+
+Sample data (2 rows):
+{
+  "id": 1,
+  "zelda_id": "82997",
+  "supplier_name": "Brandkontoret",
+  "supplier_type": "insurance",
+  "amount": "75862",
+  "description": "Fastighetsförsäkring"
+}...
+
+
+📋 TABLE: buildings
+--------------------------------------------------------------------------------
+Columns (31):
+
+  ✓ id: integer
+  ✓ zelda_id?: character varying(20)
+  ✓ fastighetsbeteckning?: character varying(100)
+  ✓ address?: character varying(255)
+  ✓ postal_code?: character varying(10)
+  ✓ city?: character varying(100)
+  ✓ kommun?: character varying(100)
+  ✓ building_type?: character varying(100)
+  ✓ building_category?: character varying(100)
+  ✓ building_year?: integer
+  ✓ height_m?: numeric
+  ✓ footprint_sqm?: numeric
+  ✓ atemp_sqm?: numeric
+  ✓ atemp_bostad_sqm?: numeric
+  ✓ antal_plan?: integer
+  ✓ antal_trapphus?: integer
+  ✓ antal_bostader?: integer
+  ✓ energy_class?: character varying(5)
+  ✓ energy_performance_kwh_sqm?: integer
+  ✓ primary_energy_kwh_sqm?: integer
+  ✓ fjarrvarme_kwh?: integer
+  ✓ el_direkt_kwh?: integer
+  ✓ varmepump_luft_kwh?: integer
+  ✓ varmepump_mark_kwh?: integer
+  ✓ gas_kwh?: integer
+  ✓ olja_kwh?: integer
+  ✓ owner_type?: character varying(100)
+  ✓ latitude?: numeric
+  ✓ longitude?: numeric
+  ✓ created_at?: timestamp without time zone
+  ✓ geometry?: jsonb
+
+Sample data (2 rows):
+{
+  "id": 4,
+  "zelda_id": "266956",
+  "fastighetsbeteckning": "Jägarbacken 1",
+  "address": "Dianavägen 10",
+  "postal_code": "11542",
+  "city": "Stockholm",
+  "kommun": "Stockholm",
+  "building_type": "Friliggande",
+  "building_category": "Lokalbyggnader",
+  "building_year": 1909,
+  "height_m": "21.00",
+  "footprint_sqm": "2100.59",
+  "atemp_sqm": "610.00",
+  "atemp_bostad_sqm": null,
+  "antal_plan": 1,
+  "antal_trapphus": 0,
+  "antal_bostader": 0,
+  "energy_class": "G",
+  "energy_performance_...
+
+
+📋 TABLE: multi_year
+--------------------------------------------------------------------------------
+Columns (22):
+
+  ✓ id: integer
+  ✓ zelda_id?: character varying(20)
+  ✓ brf_name?: character varying(255)
+  ✓ data_year?: integer
+  ✓ nettoomsattning?: bigint
+  ✓ resultat_efter_fin_poster?: bigint
+  ✓ arsresultat?: bigint
+  ✓ tillgangar?: bigint
+  ✓ eget_kapital?: bigint
+  ✓ soliditet_procent?: numeric
+  ✓ skuldsattning_per_kvm_bostadsratt?: numeric
+  ✓ skuldsattning_per_kvm_totalyta?: numeric
+  ✓ arsavgift_per_kvm?: numeric
+  ✓ energikostnad_per_kvm?: numeric
+  ✓ varmekostnad_per_kvm?: numeric
+  ✓ vattenkostnad_per_kvm?: numeric
+  ✓ driftskostnad_per_kvm?: numeric
+  ✓ underhallskostnad_per_kvm?: numeric
+  ✓ sparande_per_kvm?: numeric
+  ✓ yttre_fond?: bigint
+  ✓ genomsnittlig_skuldranra_procent?: numeric
+  ✓ created_at?: timestamp without time zone
+
+Sample data (2 rows):
+{
+  "id": 1,
+  "zelda_id": "52831",
+  "brf_name": "Brf Henriksdalskajen",
+  "data_year": 2022,
+  "nettoomsattning": "2873000",
+  "resultat_efter_fin_poster": "-499000",
+  "arsresultat": "-499007",
+  "tillgangar": "126777006",
+  "eget_kapital": "111325108",
+  "soliditet_procent": "87.80",
+  "skuldsattning_per_kvm_bostadsratt": null,
+  "skuldsattning_per_kvm_totalyta": null,
+  "arsavgift_per_kvm": null,
+  "energikostnad_per_kvm": null,
+  "varmekostnad_per_kvm": null,
+  "vattenkostnad_per_kvm": nul...
+
+
+================================================================================
+✅ AUDIT COMPLETE
+================================================================================

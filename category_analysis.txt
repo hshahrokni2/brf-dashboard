@@ -1,0 +1,559 @@
+📊 Analyzing all cost categories for normalization...
+
+Found 271 unique categories
+
+Top categories by BRF coverage:
+
+⚠️  Uncategorized: "Uppvärmning" (65 BRFs)
+⚠️  Uncategorized: "Fastighetsel" (46 BRFs)
+⚠️  Uncategorized: "Fastighetsskatt" (37 BRFs)
+⚠️  Uncategorized: "Serviceavtal" (34 BRFs)
+⚠️  Uncategorized: "Förbrukningsmaterial" (27 BRFs)
+⚠️  Uncategorized: "Besiktning och service" (18 BRFs)
+⚠️  Uncategorized: "Gemensamhetsanläggning" (17 BRFs)
+⚠️  Uncategorized: "Hyra av entrémattor" (15 BRFs)
+⚠️  Uncategorized: "Förbrukningsinventarier" (13 BRFs)
+⚠️  Uncategorized: "Brandskydd" (12 BRFs)
+⚠️  Uncategorized: "Fastighetsskatt/Kommunal avgift" (11 BRFs)
+⚠️  Uncategorized: "Systematiskt brandskyddsarbete" (11 BRFs)
+⚠️  Uncategorized: "Övrigt" (10 BRFs)
+⚠️  Uncategorized: "Samfällighetsavgifter" (10 BRFs)
+⚠️  Uncategorized: "Snöskottning" (10 BRFs)
+⚠️  Uncategorized: "Besiktningskostnader" (8 BRFs)
+⚠️  Uncategorized: "Portar" (8 BRFs)
+⚠️  Uncategorized: "Gemensamma utrymmen" (6 BRFs)
+⚠️  Uncategorized: "Grovsopor" (6 BRFs)
+⚠️  Uncategorized: "Elavgifter" (5 BRFs)
+⚠️  Uncategorized: "Fastighetsavgift och fastighetsskatt" (5 BRFs)
+⚠️  Uncategorized: "Självrisker" (5 BRFs)
+⚠️  Uncategorized: "Sophantering" (5 BRFs)
+⚠️  Uncategorized: "Trivselåtgärder" (5 BRFs)
+⚠️  Uncategorized: "Fastighetskostnader" (4 BRFs)
+⚠️  Uncategorized: "Fastighetsskatt och fastighetsavgift" (4 BRFs)
+⚠️  Uncategorized: "Gårdkostnader" (4 BRFs)
+⚠️  Uncategorized: "Myndighetstillsyn" (4 BRFs)
+⚠️  Uncategorized: "Obligatorisk ventilationskontroll (OVK)" (4 BRFs)
+⚠️  Uncategorized: "Samfällighetsavgift" (4 BRFs)
+⚠️  Uncategorized: "Sophantering och återvinning" (4 BRFs)
+⚠️  Uncategorized: "Vidarefakturering" (4 BRFs)
+⚠️  Uncategorized: "Återbäring från Riksbyggen" (3 BRFs)
+⚠️  Uncategorized: "Bevakningskostnader" (3 BRFs)
+⚠️  Uncategorized: "Förvaltningsavtalskostnader" (3 BRFs)
+⚠️  Uncategorized: "Inköp av parkeringstjänster" (3 BRFs)
+⚠️  Uncategorized: "Obligatoriska besiktningar" (3 BRFs)
+⚠️  Uncategorized: "Taxebundna kostnader" (3 BRFs)
+⚠️  Uncategorized: "Teknisk förvaltning" (3 BRFs)
+⚠️  Uncategorized: "Yttre skötsel" (3 BRFs)
+⚠️  Uncategorized: "Återbetalning elstöd" (2 BRFs)
+⚠️  Uncategorized: "Fastighetsavgift/fastighetsskatt" (2 BRFs)
+⚠️  Uncategorized: "Fastighetsskatt, fastighetsavgift" (2 BRFs)
+⚠️  Uncategorized: "Fastighetsskatt/-avgift" (2 BRFs)
+⚠️  Uncategorized: "Förbrukningsinventarier/material" (2 BRFs)
+⚠️  Uncategorized: "Förvaltningsarvode" (2 BRFs)
+⚠️  Uncategorized: "Larm och bevakning" (2 BRFs)
+⚠️  Uncategorized: "OVK" (2 BRFs)
+⚠️  Uncategorized: "Övriga fastighetskostnader" (2 BRFs)
+⚠️  Uncategorized: "Övriga kostnader" (2 BRFs)
+⚠️  Uncategorized: "Serviceavtal mättjänster" (2 BRFs)
+⚠️  Uncategorized: "Självrisk" (2 BRFs)
+⚠️  Uncategorized: "Snörjning/sandning" (2 BRFs)
+⚠️  Uncategorized: "Sotning" (2 BRFs)
+⚠️  Uncategorized: "Tillsyn, besiktning, kontroller" (2 BRFs)
+⚠️  Uncategorized: "Uppvärmningskostnad" (2 BRFs)
+⚠️  Uncategorized: "Arvode teknisk förvaltning" (1 BRFs)
+⚠️  Uncategorized: "Avgäld" (1 BRFs)
+⚠️  Uncategorized: "Avgift samfällighet" (1 BRFs)
+⚠️  Uncategorized: "Besiktning och serviceavtal" (1 BRFs)
+⚠️  Uncategorized: "Bevakn.kostn utryckning/jour" (1 BRFs)
+⚠️  Uncategorized: "Bevakning" (1 BRFs)
+⚠️  Uncategorized: "Bevakning och jour" (1 BRFs)
+⚠️  Uncategorized: "Bevakning, jour" (1 BRFs)
+⚠️  Uncategorized: "Ekonomisk förvaltning utöver avtal" (1 BRFs)
+⚠️  Uncategorized: "Energideklarationer" (1 BRFs)
+⚠️  Uncategorized: "Entrémattor" (1 BRFs)
+⚠️  Uncategorized: "Ersättningar till hyresgäster" (1 BRFs)
+⚠️  Uncategorized: "Fastighetsavgift" (1 BRFs)
+⚠️  Uncategorized: "Fastighetsavgift, fastighetsskatt" (1 BRFs)
+⚠️  Uncategorized: "Fastighetsavgift/skatt" (1 BRFs)
+⚠️  Uncategorized: "Fastighetsels" (1 BRFs)
+⚠️  Uncategorized: "Fastighetselseavgift" (1 BRFs)
+⚠️  Uncategorized: "Fastighetsförvaltning" (1 BRFs)
+⚠️  Uncategorized: "Fastighetsskatt lokaler" (1 BRFs)
+⚠️  Uncategorized: "Fastighetsskatt/fastighetsavgift" (1 BRFs)
+⚠️  Uncategorized: "Fastighetsskötse gård enl avtal" (1 BRFs)
+⚠️  Uncategorized: "Fettavskiljare" (1 BRFs)
+⚠️  Uncategorized: "Förbrukningsinv./mtrl" (1 BRFs)
+⚠️  Uncategorized: "Förbrukningsinventarier/materiel" (1 BRFs)
+⚠️  Uncategorized: "Förbrukningsmaterial/inventarier" (1 BRFs)
+⚠️  Uncategorized: "Fordon" (1 BRFs)
+⚠️  Uncategorized: "Förvaltningsarbete" (1 BRFs)
+⚠️  Uncategorized: "Förvaltningsarvode ekonomi" (1 BRFs)
+⚠️  Uncategorized: "GA kostnader som vidarefaktureras" (1 BRFs)
+⚠️  Uncategorized: "Garage/parkering" (1 BRFs)
+⚠️  Uncategorized: "Gas" (1 BRFs)
+⚠️  Uncategorized: "Gemensamhetsanläggning 1" (1 BRFs)
+⚠️  Uncategorized: "Gemensamhetsanläggning 2" (1 BRFs)
+⚠️  Uncategorized: "Gemensamhetsanläggning 7" (1 BRFs)
+⚠️  Uncategorized: "Gemensamhetsanläggning GA1" (1 BRFs)
+⚠️  Uncategorized: "Gemensamhetsanläggning GA2" (1 BRFs)
+⚠️  Uncategorized: "Gemensamhetsanläggningar" (1 BRFs)
+⚠️  Uncategorized: "Gemensamt anläggning" (1 BRFs)
+⚠️  Uncategorized: "Högtryckspolning" (1 BRFs)
+⚠️  Uncategorized: "Hyra för kontorslokal" (1 BRFs)
+⚠️  Uncategorized: "Justering skatt föregående år" (1 BRFs)
+⚠️  Uncategorized: "Kommunal fastighetsavgift" (1 BRFs)
+⚠️  Uncategorized: "Korr. fastighetsskatt" (1 BRFs)
+⚠️  Uncategorized: "Kyla" (1 BRFs)
+⚠️  Uncategorized: "Larmtjänst, bevakningskostnader etc" (1 BRFs)
+⚠️  Uncategorized: "Lokalvård och entrémattor" (1 BRFs)
+⚠️  Uncategorized: "Matthyra" (1 BRFs)
+⚠️  Uncategorized: "Myndighetskrav" (1 BRFs)
+⚠️  Uncategorized: "Obligatoriska service- och besiktningskostnader" (1 BRFs)
+⚠️  Uncategorized: "Övrig administration" (1 BRFs)
+⚠️  Uncategorized: "Övrig tillsyn och skötsel" (1 BRFs)
+⚠️  Uncategorized: "Övriga externa tjänster" (1 BRFs)
+⚠️  Uncategorized: "Övriga förvaltningskostnader" (1 BRFs)
+⚠️  Uncategorized: "Övriga köpta tjänster" (1 BRFs)
+⚠️  Uncategorized: "Övriga poster" (1 BRFs)
+⚠️  Uncategorized: "Övriga utgifter för köpta tjänster" (1 BRFs)
+⚠️  Uncategorized: "Panter och överlåtelser" (1 BRFs)
+⚠️  Uncategorized: "Parkeringstjänst" (1 BRFs)
+⚠️  Uncategorized: "Parkeringstjänster" (1 BRFs)
+⚠️  Uncategorized: "Pcb/Radonsanering" (1 BRFs)
+⚠️  Uncategorized: "Rengöring ventilation, brandskydd" (1 BRFs)
+⚠️  Uncategorized: "Revisionsarbete" (1 BRFs)
+⚠️  Uncategorized: "Samfällighet" (1 BRFs)
+⚠️  Uncategorized: "Samfällighet garage" (1 BRFs)
+⚠️  Uncategorized: "Samfällighet sopsug" (1 BRFs)
+⚠️  Uncategorized: "Samfälligheter" (1 BRFs)
+⚠️  Uncategorized: "Serviceavgift" (1 BRFs)
+⚠️  Uncategorized: "Serviceavtal IMD" (1 BRFs)
+⚠️  Uncategorized: "Solceller" (1 BRFs)
+⚠️  Uncategorized: "Sophantering sopsug" (1 BRFs)
+⚠️  Uncategorized: "Sopsugsanläggning" (1 BRFs)
+⚠️  Uncategorized: "Taxebundna kostnader (El)" (1 BRFs)
+⚠️  Uncategorized: "Teknik förvaltning" (1 BRFs)
+⚠️  Uncategorized: "Tillsynsavgift köldmedier" (1 BRFs)
+⚠️  Uncategorized: "Ventilationskontroll OVK" (1 BRFs)
+⚠️  Uncategorized: "Yttre och inre skötsel" (1 BRFs)
+
+================================================================================
+NORMALIZATION GROUPS:
+================================================================================
+
+📦 Water & Sewage (6 variants, 5+ BRFs)
+   "Vatten" (56 BRFs)
+   "Vatten och avlopp" (28 BRFs)
+   "Vatten/avlopp" (4 BRFs)
+   "Vatten- och avloppsavgifter" (3 BRFs)
+   "Taxebundna kostnader (Vatten)" (1 BRFs)
+   "Vattenkostnader" (1 BRFs)
+
+📦 Internet & Communications (21 variants, 9+ BRFs)
+   "Bredband" (48 BRFs)
+   "Kabel-TV" (22 BRFs)
+   "Kabel-tv" (11 BRFs)
+   "Mattvätt/Hyrmattor" (8 BRFs)
+   "Kabel-TV och bredband" (7 BRFs)
+   "Kabel- och digital-TV" (4 BRFs)
+   "Kabel-TV/bredband" (3 BRFs)
+   "Bredband/Kabeltv" (2 BRFs)
+   "Kabel-TV/Bredband" (2 BRFs)
+   "TV, bredband och telefoni" (2 BRFs)
+   ... and 11 more variants
+
+📦 Property Maintenance (11 variants, 6+ BRFs)
+   "Fastighetsskötsel" (48 BRFs)
+   "Övriga driftkostnader" (7 BRFs)
+   "Förvaltningsarvode drift" (4 BRFs)
+   "Fastighetsskötsel, lokalvård och samfälligheter" (3 BRFs)
+   "Övriga driftskostnader" (3 BRFs)
+   "Övrig drift" (2 BRFs)
+   "Drift" (1 BRFs)
+   "Drift garage" (1 BRFs)
+   "Drift och förbruknings-, överfylt" (1 BRFs)
+   "Fastighetsskötsel, lokalvård och trädgård" (1 BRFs)
+   ... and 1 more variants
+
+📦 Electricity (21 variants, 7+ BRFs)
+   "El" (39 BRFs)
+   "Fastighetsskötsel utöver avtal" (10 BRFs)
+   "Fastighetsskötsel entreprenad" (9 BRFs)
+   "Fastighetsskötsel enl avtal" (5 BRFs)
+   "Fastighetsskötsel enligt avtal" (5 BRFs)
+   "Fastighetsskötsel gård utöver avtal" (5 BRFs)
+   "Fastighetsskötsel beställning" (4 BRFs)
+   "Fastighetsskötsel gård enl avtal" (4 BRFs)
+   "Fastighetsskötsel gård beställning" (2 BRFs)
+   "Fastighetsskötsel gård enligt avtal" (2 BRFs)
+   ... and 11 more variants
+
+📦 Repairs & Maintenance (26 variants, 8+ BRFs)
+   "Reparationer" (39 BRFs)
+   "Planerat underhåll" (20 BRFs)
+   "Underhåll" (11 BRFs)
+   "Periodiskt underhåll" (8 BRFs)
+   "Hissreparationer" (6 BRFs)
+   "Löpande underhåll" (4 BRFs)
+   "Underhåll Ventilation" (2 BRFs)
+   "Byggnad reparationer" (1 BRFs)
+   "Hisskostnader reparationer och serviceavtal" (1 BRFs)
+   "Hissreparation" (1 BRFs)
+   ... and 16 more variants
+
+📦 Insurance (8 variants, 8+ BRFs)
+   "Fastighetsförsäkringar" (36 BRFs)
+   "Försäkringskostnader" (21 BRFs)
+   "Fastighetsförsäkring" (12 BRFs)
+   "Försäkring" (10 BRFs)
+   "Försäkringspremier" (5 BRFs)
+   "Försäkringar" (4 BRFs)
+   "Försäkringsskador" (3 BRFs)
+   "Försäkringspremie" (2 BRFs)
+
+📦 Snow Removal (4 variants, 3+ BRFs)
+   "Snöröjning/sandning" (33 BRFs)
+   "Snöröjning" (7 BRFs)
+   "Snö och halkbekämpning" (3 BRFs)
+   "Snö- och halkbekämpning" (3 BRFs)
+
+📦 Waste Management (5 variants, 3+ BRFs)
+   "Sophämtning" (31 BRFs)
+   "Avfallshantering" (22 BRFs)
+   "Sophämtning/grovsopor/återvinning" (1 BRFs)
+   "Sophämtningsavgifter" (1 BRFs)
+   "Sophantering sophämtning" (1 BRFs)
+
+📦 Land Lease (3 variants, 3+ BRFs)
+   "Tomträttsavgäld" (27 BRFs)
+   "Tomträttsavgälder" (5 BRFs)
+   "Tomträttsavgäld och arrende ledningar" (1 BRFs)
+
+📦 Cleaning (19 variants, 9+ BRFs)
+   "Städning" (22 BRFs)
+   "Städkostnader" (18 BRFs)
+   "Sophämtning/renhållning" (17 BRFs)
+   "Städning enligt avtal" (13 BRFs)
+   "Städning entreprenad" (6 BRFs)
+   "Städning utöver avtal" (5 BRFs)
+   "Renhållning" (4 BRFs)
+   "Fastskötsel/städ tjänster" (2 BRFs)
+   "Städning enligt beställning" (2 BRFs)
+   "Städskostnader" (2 BRFs)
+   ... and 9 more variants
+
+📦 Landscaping (4 variants, 4+ BRFs)
+   "Trädgårdsskötsel" (18 BRFs)
+   "Trädgårdsarbete" (12 BRFs)
+   "Trädgård och utemiljö" (4 BRFs)
+   "Trädgård" (1 BRFs)
+
+📦 Elevator (7 variants, 4+ BRFs)
+   "Hisskostnader" (15 BRFs)
+   "Hissbesiktning" (11 BRFs)
+   "Hisservice/besiktning" (3 BRFs)
+   "Hiss" (1 BRFs)
+   "Hiss (besiktn., serviceavtal)" (1 BRFs)
+   "Hisskostnader besiktning" (1 BRFs)
+   "Hisstillsyn" (1 BRFs)
+
+📦 Heating (4 variants, 3+ BRFs)
+   "Värme" (13 BRFs)
+   "Fjärrvärme" (3 BRFs)
+   "Taxebundna kostnader (Värme)" (1 BRFs)
+   "Underhåll Värme" (1 BRFs)
+
+================================================================================
+SQL TO CREATE NORMALIZATION TABLE:
+================================================================================
+
+CREATE TABLE IF NOT EXISTS category_normalization (
+  id SERIAL PRIMARY KEY,
+  original_category VARCHAR(255) UNIQUE NOT NULL,
+  normalized_category VARCHAR(100) NOT NULL,
+  category_group VARCHAR(50) NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE INDEX idx_original_cat ON category_normalization(original_category);
+CREATE INDEX idx_normalized_cat ON category_normalization(normalized_category);
+
+INSERT INTO category_normalization (original_category, normalized_category, category_group) VALUES
+  ('Vatten', 'Water & Sewage', 'water')
+,
+  ('Vatten och avlopp', 'Water & Sewage', 'water')
+,
+  ('Vatten/avlopp', 'Water & Sewage', 'water')
+,
+  ('Vatten- och avloppsavgifter', 'Water & Sewage', 'water')
+,
+  ('Taxebundna kostnader (Vatten)', 'Water & Sewage', 'water')
+,
+  ('Vattenkostnader', 'Water & Sewage', 'water')
+,
+  ('Bredband', 'Internet & Communications', 'internet')
+,
+  ('Kabel-TV', 'Internet & Communications', 'internet')
+,
+  ('Kabel-tv', 'Internet & Communications', 'internet')
+,
+  ('Mattvätt/Hyrmattor', 'Internet & Communications', 'internet')
+,
+  ('Kabel-TV och bredband', 'Internet & Communications', 'internet')
+,
+  ('Kabel- och digital-TV', 'Internet & Communications', 'internet')
+,
+  ('Kabel-TV/bredband', 'Internet & Communications', 'internet')
+,
+  ('Bredband/Kabeltv', 'Internet & Communications', 'internet')
+,
+  ('Kabel-TV/Bredband', 'Internet & Communications', 'internet')
+,
+  ('TV, bredband och telefoni', 'Internet & Communications', 'internet')
+,
+  ('Abonnemang porttelefon/hisstelefon', 'Internet & Communications', 'internet')
+,
+  ('Bredband, telefoni, TV', 'Internet & Communications', 'internet')
+,
+  ('Bredband/kabel-TV', 'Internet & Communications', 'internet')
+,
+  ('Kabel TV och bredband', 'Internet & Communications', 'internet')
+,
+  ('Kabel TV/Bredband', 'Internet & Communications', 'internet')
+,
+  ('Kabel-tv, bredband, IT', 'Internet & Communications', 'internet')
+,
+  ('Kabel-tv/bredband', 'Internet & Communications', 'internet')
+,
+  ('Kabel-tv/Bredband/IT', 'Internet & Communications', 'internet')
+,
+  ('Kabel-TV/internet', 'Internet & Communications', 'internet')
+,
+  ('Mattvätt', 'Internet & Communications', 'internet')
+,
+  ('TV/Bredband', 'Internet & Communications', 'internet')
+,
+  ('Fastighetsskötsel', 'Property Maintenance', 'property')
+,
+  ('Övriga driftkostnader', 'Property Maintenance', 'property')
+,
+  ('Förvaltningsarvode drift', 'Property Maintenance', 'property')
+,
+  ('Fastighetsskötsel, lokalvård och samfälligheter', 'Property Maintenance', 'property')
+,
+  ('Övriga driftskostnader', 'Property Maintenance', 'property')
+,
+  ('Övrig drift', 'Property Maintenance', 'property')
+,
+  ('Drift', 'Property Maintenance', 'property')
+,
+  ('Drift garage', 'Property Maintenance', 'property')
+,
+  ('Drift och förbruknings-, överfylt', 'Property Maintenance', 'property')
+,
+  ('Fastighetsskötsel, lokalvård och trädgård', 'Property Maintenance', 'property')
+,
+  ('Summa Driftskostnader', 'Property Maintenance', 'property')
+,
+  ('El', 'Electricity', 'electricity')
+,
+  ('Fastighetsskötsel utöver avtal', 'Electricity', 'electricity')
+,
+  ('Fastighetsskötsel entreprenad', 'Electricity', 'electricity')
+,
+  ('Fastighetsskötsel enl avtal', 'Electricity', 'electricity')
+,
+  ('Fastighetsskötsel enligt avtal', 'Electricity', 'electricity')
+,
+  ('Fastighetsskötsel gård utöver avtal', 'Electricity', 'electricity')
+,
+  ('Fastighetsskötsel beställning', 'Electricity', 'electricity')
+,
+  ('Fastighetsskötsel gård enl avtal', 'Electricity', 'electricity')
+,
+  ('Fastighetsskötsel gård beställning', 'Electricity', 'electricity')
+,
+  ('Fastighetsskötsel gård enligt avtal', 'Electricity', 'electricity')
+,
+  ('Fastighetsskötsel gård entreprenad', 'Electricity', 'electricity')
+,
+  ('El garage', 'Electricity', 'electricity')
+,
+  ('Fastighetsskötsel går den avtal', 'Electricity', 'electricity')
+,
+  ('Fastighetsskötsel och lokalvård', 'Electricity', 'electricity')
+,
+  ('Fastighetsskötsel och teknisk förvaltning', 'Electricity', 'electricity')
+,
+  ('Fastighetsskötsel samt städning', 'Electricity', 'electricity')
+,
+  ('Fastighetsskötsel teknisk', 'Electricity', 'electricity')
+,
+  ('Trädgårdsskötsel bas', 'Electricity', 'electricity')
+,
+  ('Trädgårdsskötsel extradeb.', 'Electricity', 'electricity')
+,
+  ('Yttre skötsel och snöröjning', 'Electricity', 'electricity')
+,
+  ('Yttre skötsel samt snöröjning/sandning', 'Electricity', 'electricity')
+,
+  ('Reparationer', 'Repairs & Maintenance', 'repairs')
+,
+  ('Planerat underhåll', 'Repairs & Maintenance', 'repairs')
+,
+  ('Underhåll', 'Repairs & Maintenance', 'repairs')
+,
+  ('Periodiskt underhåll', 'Repairs & Maintenance', 'repairs')
+,
+  ('Hissreparationer', 'Repairs & Maintenance', 'repairs')
+,
+  ('Löpande underhåll', 'Repairs & Maintenance', 'repairs')
+,
+  ('Underhåll Ventilation', 'Repairs & Maintenance', 'repairs')
+,
+  ('Byggnad reparationer', 'Repairs & Maintenance', 'repairs')
+,
+  ('Hisskostnader reparationer och serviceavtal', 'Repairs & Maintenance', 'repairs')
+,
+  ('Hissreparation', 'Repairs & Maintenance', 'repairs')
+,
+  ('Hissreparationen', 'Repairs & Maintenance', 'repairs')
+,
+  ('Löpande reparationer', 'Repairs & Maintenance', 'repairs')
+,
+  ('Löpande reparationer och underhåll', 'Repairs & Maintenance', 'repairs')
+,
+  ('Periodiskt underhåll gemensamma utrymmen', 'Repairs & Maintenance', 'repairs')
+,
+  ('Periodiskt underhåll totalt', 'Repairs & Maintenance', 'repairs')
+,
+  ('Planerat underhåll Återställande av gården', 'Repairs & Maintenance', 'repairs')
+,
+  ('Planerat underhåll Energieffektivisering', 'Repairs & Maintenance', 'repairs')
+,
+  ('Reparationer och underhåll', 'Repairs & Maintenance', 'repairs')
+,
+  ('Reparationer totalt', 'Repairs & Maintenance', 'repairs')
+,
+  ('Reparationer, löpande underhåll', 'Repairs & Maintenance', 'repairs')
+,
+  ('Reparationer/underhåll', 'Repairs & Maintenance', 'repairs')
+,
+  ('Underhåll El', 'Repairs & Maintenance', 'repairs')
+,
+  ('Underhåll Fönster', 'Repairs & Maintenance', 'repairs')
+,
+  ('Underhåll gemensamma utrymmen', 'Repairs & Maintenance', 'repairs')
+,
+  ('Underhåll installationer', 'Repairs & Maintenance', 'repairs')
+,
+  ('Underhåll V/A Sanitet', 'Repairs & Maintenance', 'repairs')
+,
+  ('Fastighetsförsäkringar', 'Insurance', 'insurance')
+,
+  ('Försäkringskostnader', 'Insurance', 'insurance')
+,
+  ('Fastighetsförsäkring', 'Insurance', 'insurance')
+,
+  ('Försäkring', 'Insurance', 'insurance')
+,
+  ('Försäkringspremier', 'Insurance', 'insurance')
+,
+  ('Försäkringar', 'Insurance', 'insurance')
+,
+  ('Försäkringsskador', 'Insurance', 'insurance')
+,
+  ('Försäkringspremie', 'Insurance', 'insurance')
+,
+  ('Snöröjning/sandning', 'Snow Removal', 'snow')
+,
+  ('Snöröjning', 'Snow Removal', 'snow')
+,
+  ('Snö och halkbekämpning', 'Snow Removal', 'snow')
+,
+  ('Snö- och halkbekämpning', 'Snow Removal', 'snow')
+,
+  ('Sophämtning', 'Waste Management', 'waste')
+,
+  ('Avfallshantering', 'Waste Management', 'waste')
+,
+  ('Sophämtning/grovsopor/återvinning', 'Waste Management', 'waste')
+,
+  ('Sophämtningsavgifter', 'Waste Management', 'waste')
+,
+  ('Sophantering sophämtning', 'Waste Management', 'waste')
+,
+  ('Tomträttsavgäld', 'Land Lease', 'land')
+,
+  ('Tomträttsavgälder', 'Land Lease', 'land')
+,
+  ('Tomträttsavgäld och arrende ledningar', 'Land Lease', 'land')
+,
+  ('Städning', 'Cleaning', 'cleaning')
+,
+  ('Städkostnader', 'Cleaning', 'cleaning')
+,
+  ('Sophämtning/renhållning', 'Cleaning', 'cleaning')
+,
+  ('Städning enligt avtal', 'Cleaning', 'cleaning')
+,
+  ('Städning entreprenad', 'Cleaning', 'cleaning')
+,
+  ('Städning utöver avtal', 'Cleaning', 'cleaning')
+,
+  ('Renhållning', 'Cleaning', 'cleaning')
+,
+  ('Fastskötsel/städ tjänster', 'Cleaning', 'cleaning')
+,
+  ('Städning enligt beställning', 'Cleaning', 'cleaning')
+,
+  ('Städskostnader', 'Cleaning', 'cleaning')
+,
+  ('Fastighetsavgift bostäder', 'Cleaning', 'cleaning')
+,
+  ('Fastighetsskötsel/städning entreprenad', 'Cleaning', 'cleaning')
+,
+  ('Fastighetsstäd', 'Cleaning', 'cleaning')
+,
+  ('Fastighetsstäd extra', 'Cleaning', 'cleaning')
+,
+  ('Kostnader i samband med städdagar', 'Cleaning', 'cleaning')
+,
+  ('Renhållning/återvinning', 'Cleaning', 'cleaning')
+,
+  ('Städkostnader/entrémattor', 'Cleaning', 'cleaning')
+,
+  ('Städning extradebiteringar', 'Cleaning', 'cleaning')
+,
+  ('Städning och entrémattor', 'Cleaning', 'cleaning')
+,
+  ('Trädgårdsskötsel', 'Landscaping', 'landscaping')
+,
+  ('Trädgårdsarbete', 'Landscaping', 'landscaping')
+,
+  ('Trädgård och utemiljö', 'Landscaping', 'landscaping')
+,
+  ('Trädgård', 'Landscaping', 'landscaping')
+,
+  ('Hisskostnader', 'Elevator', 'elevator')
+,
+  ('Hissbesiktning', 'Elevator', 'elevator')
+,
+  ('Hisservice/besiktning', 'Elevator', 'elevator')
+,
+  ('Hiss', 'Elevator', 'elevator')
+,
+  ('Hiss (besiktn., serviceavtal)', 'Elevator', 'elevator')
+,
+  ('Hisskostnader besiktning', 'Elevator', 'elevator')
+,
+  ('Hisstillsyn', 'Elevator', 'elevator')
+,
+  ('Värme', 'Heating', 'heating')
+,
+  ('Fjärrvärme', 'Heating', 'heating')
+,
+  ('Taxebundna kostnader (Värme)', 'Heating', 'heating')
+,
+  ('Underhåll Värme', 'Heating', 'heating')
+;

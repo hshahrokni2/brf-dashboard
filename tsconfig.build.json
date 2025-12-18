@@ -1,0 +1,17 @@
+{
+    "extends": "./tsconfig.json",
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "apply_user_corrections.ts",
+        "fix_normalization.ts",
+        "create_category_normalization.ts",
+        "comprehensive_schema_audit.ts",
+        "*.ts"
+    ]
+}

@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Default Dark Mode Look (North Modern) */
+    --background: 222.2 84% 4.9%;
+    /* Slate 950 #020617 mostly, but let's stick to standard dark slate */
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 6.9%;
+    /* Slightly lighter than bg */
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 199 89% 48%;
+    /* Sky 500 #0ea5e9 */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 199 89% 48%;
+
+    --radius: 0.5rem;
+  }
+
+  /* We enforce dark mode by default now */
+  .light {
+    /* Optional light mode overrides if needed later, but keeping it dark for "North Modern" vibe */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Glassmorphism Utilities */
+@layer utilities {
+  .glass {
+    @apply bg-slate-900/70 backdrop-blur-md border border-slate-700/50 shadow-xl;
+  }
+
+  .glass-card {
+    @apply bg-slate-800/50 backdrop-blur-sm border border-slate-700/30 hover:bg-slate-800/70 transition-colors duration-300;
+  }
+}
