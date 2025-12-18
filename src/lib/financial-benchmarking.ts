@@ -8,6 +8,13 @@ export interface FinancialBenchmarkData {
 
 // Get interest rate distribution (stored as percentage e.g. 3.5 for 3.5%)
 export async function getInterestRateBenchmark(district?: string | null): Promise<FinancialBenchmarkData[]> {
+    const params: any[] = [];
+    let districtFilter = '';
+    if (district) {
+        params.push(district);
+        districtFilter = `AND m.district = $${params.length}`;
+    }
+
     const sql = `
         SELECT 
             l.zelda_id,
@@ -16,11 +23,12 @@ export async function getInterestRateBenchmark(district?: string | null): Promis
         FROM brf_loans l
         JOIN brf_metadata m USING (zelda_id)
         WHERE l.interest_rate IS NOT NULL AND l.interest_rate > 0
+          ${districtFilter}
         GROUP BY l.zelda_id, m.brf_name
         ORDER BY value
     `;
 
-    const result = await query(sql, []);
+    const result = await query(sql, params);
     return result.rows.map(row => ({
         zelda_id: row.zelda_id,
         brf_name: row.brf_name,
@@ -30,6 +38,13 @@ export async function getInterestRateBenchmark(district?: string | null): Promis
 
 // Get debt per sqm distribution from brf_metrics (has data for all BRFs)
 export async function getLoanPerSqmBenchmark(district?: string | null): Promise<FinancialBenchmarkData[]> {
+    const params: any[] = [];
+    let districtFilter = '';
+    if (district) {
+        params.push(district);
+        districtFilter = `AND m.district = $${params.length}`;
+    }
+
     const sql = `
         SELECT 
             met.zelda_id,
@@ -38,10 +53,11 @@ export async function getLoanPerSqmBenchmark(district?: string | null): Promise<
         FROM brf_metrics met
         JOIN brf_metadata m USING (zelda_id)
         WHERE met.debt_per_sqm_total IS NOT NULL AND met.debt_per_sqm_total > 0
+          ${districtFilter}
         ORDER BY value
     `;
 
-    const result = await query(sql, []);
+    const result = await query(sql, params);
     return result.rows.map(row => ({
         zelda_id: row.zelda_id,
         brf_name: row.brf_name,
@@ -51,6 +67,13 @@ export async function getLoanPerSqmBenchmark(district?: string | null): Promise<
 
 // Get monthly avgift (fee per sqm) from brf_metrics
 export async function getAvgiftBenchmark(district?: string | null): Promise<FinancialBenchmarkData[]> {
+    const params: any[] = [];
+    let districtFilter = '';
+    if (district) {
+        params.push(district);
+        districtFilter = `AND m.district = $${params.length}`;
+    }
+
     const sql = `
         SELECT 
             met.zelda_id,
@@ -59,10 +82,11 @@ export async function getAvgiftBenchmark(district?: string | null): Promise<Fina
         FROM brf_metrics met
         JOIN brf_metadata m USING (zelda_id)
         WHERE met.monthly_fee_per_sqm IS NOT NULL AND met.monthly_fee_per_sqm > 0
+          ${districtFilter}
         ORDER BY value
     `;
 
-    const result = await query(sql, []);
+    const result = await query(sql, params);
     return result.rows.map(row => ({
         zelda_id: row.zelda_id,
         brf_name: row.brf_name,

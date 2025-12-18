@@ -32,6 +32,14 @@ export async function getBenchmarkData(
     const patterns = categoryPatterns[normalizedCategory] || [`%${normalizedCategory.toLowerCase()}%`];
     const patternConditions = patterns.map((_, i) => `LOWER(d.category) LIKE $${i + 1}`).join(' OR ');
 
+    // Build params array - patterns first, then optional district
+    const params: any[] = [...patterns];
+    let districtFilter = '';
+    if (district) {
+        params.push(district);
+        districtFilter = `AND m.district = $${params.length}`;
+    }
+
     const sql = `
         SELECT 
             d.zelda_id,
@@ -43,12 +51,13 @@ export async function getBenchmarkData(
         WHERE (${patternConditions})
           AND d.amount_current > 0
           AND p.total_area_sqm > 0
+          ${districtFilter}
         GROUP BY d.zelda_id, m.brf_name, p.total_area_sqm
         HAVING SUM(d.amount_current) / NULLIF(p.total_area_sqm, 0) > 0
         ORDER BY value
     `;
 
-    const result = await query(sql, patterns);
+    const result = await query(sql, params);
     return result.rows.map(row => ({
         zelda_id: row.zelda_id,
         brf_name: row.brf_name,
