@@ -51,7 +51,7 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
     // Convert BRFs to valid GeoJSON FeatureCollection
     const geojson = {
         type: "FeatureCollection",
-        features: brfs
+        features: (brfs as any[])
             .filter((b) => b.geometry) // Only used BRFs with geometry
             .map((b) => ({
                 type: "Feature",

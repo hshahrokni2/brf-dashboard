@@ -152,7 +152,7 @@ export function DrillDownPanel({ brf, onClose }: DrillDownPanelProps) {
                                         <div className="bg-slate-800/30 rounded-lg p-3 border border-slate-700/50">
                                             <div className="flex justify-between items-start mb-1">
                                                 <span className="text-sm font-semibold text-indigo-300">{e.type?.replace(/_/g, ' ') || 'Event'}</span>
-                                                <span className="text-xs text-slate-500">{e.date && e.date > 1900 ? e.date : 'Historical'}</span>
+                                                <span className="text-xs text-slate-500">{e.date && Number(e.date) > 1900 ? e.date : 'Historical'}</span>
                                             </div>
                                             <p className="text-sm text-slate-300">{e.description}</p>
                                         </div>

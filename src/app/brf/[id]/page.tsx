@@ -155,10 +155,10 @@ export default async function BrfDetailPage({ params }: BrfPageProps) {
             {/* Key Metrics */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
                 <StatCard icon={Building2} label="Apartments" value={brf.total_apartments} />
-                <StatCard icon={Building2} label="Total Area" value={brf.total_area_sqm?.toLocaleString('sv-SE')} subValue="m²" />
+                <StatCard icon={Building2} label="Total Area" value={brf.total_area_sqm?.toLocaleString('sv-SE') ?? null} subValue="m²" />
                 <StatCard icon={Shield} label="Soliditet" value={brf.solidarity_percent ? `${brf.solidarity_percent.toFixed(1)}%` : null} />
-                <StatCard icon={Wallet} label="Debt/m²" value={brf.debt_per_sqm?.toLocaleString('sv-SE')} subValue="kr/m²" />
-                <StatCard icon={Percent} label="Avg Interest" value={avgInterest?.toFixed(2)} subValue="%" />
+                <StatCard icon={Wallet} label="Debt/m²" value={brf.debt_per_sqm?.toLocaleString('sv-SE') ?? null} subValue="kr/m²" />
+                <StatCard icon={Percent} label="Avg Interest" value={avgInterest?.toFixed(2) ?? null} subValue="%" />
                 <StatCard icon={Users} label="Board Size" value={brf.board_size} />
             </div>
 
