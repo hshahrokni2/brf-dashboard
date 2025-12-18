@@ -62,6 +62,41 @@ export interface BrfFullDetail {
         percentile: number | null;
     }>;
 
+    // Full Energy Declaration (all 32+ columns from Boverket)
+    energy_declaration: {
+        formular_id: number | null;
+        property_designation: string | null;
+        address: string | null;
+        postal_code: string | null;
+        city: string | null;
+        primary_energy_2020: number | null;
+        construction_year: number | null;
+        heated_area_sqm: number | null;
+        num_apartments: number | null;
+        building_type: string | null;
+        building_complexity: string | null;
+        num_stairwells: number | null;
+        basement_floors: number | null;
+        ventilation_type: string | null;
+        site_inspected: boolean | null;
+        expert_qualification: string | null;
+        district_heating_uppv: number | null;
+        district_heating_vv: number | null;
+        solar_kwh: number | null;
+        heat_pump_ground: number | null;
+        heat_pump_exhaust: number | null;
+        valid_until: string | null;
+    } | null;
+
+    // Recommended Measures from energy declaration
+    recommended_measures: Array<{
+        measure_type: string;
+        measure_name: string;
+        estimated_energy_reduction_kwh: number | null;
+        estimated_cost_factor: number | null;
+        investment_level: 'Låg' | 'Medel' | 'Hög';
+    }>;
+
     // Percentiles (compared to all BRFs)
     percentiles: {
         solidarity: number | null;
@@ -200,6 +235,44 @@ export async function getBrfFullDetail(zeldaId: string): Promise<BrfFullDetail |
         console.log('Costs query failed', e);
     }
 
+    // Get full energy declaration data
+    let energyDecl: any = null;
+    try {
+        const energyDeclSql = `
+            SELECT 
+                formular_id, property_designation, address, postal_code, city,
+                primary_energy_2020, construction_year, heated_area_sqm, num_apartments,
+                building_type, building_complexity, num_stairwells, basement_floors,
+                ventilation_type, site_inspected, expert_qualification,
+                district_heating_uppv, district_heating_vv, solar_kwh,
+                heat_pump_ground, heat_pump_exhaust, valid_until
+            FROM brf_energy_declarations
+            WHERE zelda_id = $1
+            ORDER BY formular_id DESC
+            LIMIT 1
+        `;
+        const energyDeclResult = await query(energyDeclSql, [zeldaId]);
+        energyDecl = energyDeclResult.rows[0] || null;
+    } catch (e) {
+        console.log('Energy declaration query failed', e);
+    }
+
+    // Get recommended measures
+    let measuresResult = { rows: [] as any[] };
+    try {
+        const measuresSql = `
+            SELECT 
+                measure_type, measure_name,
+                estimated_energy_reduction_kwh, estimated_cost_factor
+            FROM brf_recommended_measures
+            WHERE zelda_id = $1
+            ORDER BY estimated_energy_reduction_kwh DESC NULLS LAST
+        `;
+        measuresResult = await query(measuresSql, [zeldaId]);
+    } catch (e) {
+        console.log('Measures query failed', e);
+    }
+
     // Calculate percentiles
     let pct: any = {};
     try {
@@ -257,6 +330,37 @@ export async function getBrfFullDetail(zeldaId: string): Promise<BrfFullDetail |
             category: c.category,
             amount: parseFloat(c.amount),
             percentile: c.percentile ? Math.round(parseFloat(c.percentile)) : null
+        })),
+        energy_declaration: energyDecl ? {
+            formular_id: energyDecl.formular_id,
+            property_designation: energyDecl.property_designation,
+            address: energyDecl.address,
+            postal_code: energyDecl.postal_code,
+            city: energyDecl.city,
+            primary_energy_2020: energyDecl.primary_energy_2020 ? parseInt(energyDecl.primary_energy_2020) : null,
+            construction_year: energyDecl.construction_year ? parseInt(energyDecl.construction_year) : null,
+            heated_area_sqm: energyDecl.heated_area_sqm ? parseInt(energyDecl.heated_area_sqm) : null,
+            num_apartments: energyDecl.num_apartments ? parseInt(energyDecl.num_apartments) : null,
+            building_type: energyDecl.building_type,
+            building_complexity: energyDecl.building_complexity,
+            num_stairwells: energyDecl.num_stairwells ? parseInt(energyDecl.num_stairwells) : null,
+            basement_floors: energyDecl.basement_floors ? parseInt(energyDecl.basement_floors) : null,
+            ventilation_type: energyDecl.ventilation_type,
+            site_inspected: energyDecl.site_inspected,
+            expert_qualification: energyDecl.expert_qualification,
+            district_heating_uppv: energyDecl.district_heating_uppv ? parseInt(energyDecl.district_heating_uppv) : null,
+            district_heating_vv: energyDecl.district_heating_vv ? parseInt(energyDecl.district_heating_vv) : null,
+            solar_kwh: energyDecl.solar_kwh ? parseInt(energyDecl.solar_kwh) : null,
+            heat_pump_ground: energyDecl.heat_pump_ground ? parseInt(energyDecl.heat_pump_ground) : null,
+            heat_pump_exhaust: energyDecl.heat_pump_exhaust ? parseInt(energyDecl.heat_pump_exhaust) : null,
+            valid_until: energyDecl.valid_until
+        } : null,
+        recommended_measures: measuresResult.rows.map((m: any) => ({
+            measure_type: m.measure_type,
+            measure_name: m.measure_name,
+            estimated_energy_reduction_kwh: m.estimated_energy_reduction_kwh ? parseInt(m.estimated_energy_reduction_kwh) : null,
+            estimated_cost_factor: m.estimated_cost_factor ? parseFloat(m.estimated_cost_factor) : null,
+            investment_level: (m.estimated_cost_factor < 0.5 ? 'Låg' : m.estimated_cost_factor < 1.0 ? 'Medel' : 'Hög') as 'Låg' | 'Medel' | 'Hög'
         })),
         percentiles: {
             solidarity: pct.solidarity_pct ? Math.round((1 - parseFloat(pct.solidarity_pct)) * 100) : null,

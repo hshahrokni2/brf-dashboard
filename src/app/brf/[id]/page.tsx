@@ -162,42 +162,190 @@ export default async function BrfDetailPage({ params }: BrfPageProps) {
                 <StatCard icon={Users} label="Board Size" value={brf.board_size} />
             </div>
 
-            {/* Energy Declaration */}
-            {(brf.heating_type || brf.energy_kwh_per_sqm) && (
+            {/* Full Energy Declaration */}
+            {(brf.energy_declaration || brf.energy_class || brf.energy_kwh_per_sqm) && (
                 <Card className="bg-slate-900/50 border-slate-800 mb-8">
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                            <Zap className="w-5 h-5 text-yellow-400" />
-                            Energy Declaration
+                        <CardTitle className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <Zap className="w-5 h-5 text-yellow-400" />
+                                Energideklaration
+                            </div>
+                            {brf.energy_declaration?.formular_id && (
+                                <span className="text-xs text-slate-500 font-normal">
+                                    ID: {brf.energy_declaration.formular_id}
+                                </span>
+                            )}
                         </CardTitle>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="space-y-6">
+                        {/* Main Energy Metrics */}
                         <div className="grid md:grid-cols-3 gap-4">
                             {brf.energy_class && (
-                                <div className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg">
-                                    <span className="text-slate-300">Energy Class</span>
-                                    <span className={`text-2xl font-bold ${brf.energy_class <= 'C' ? 'text-emerald-400' :
+                                <div className="flex items-center justify-between p-4 bg-slate-800/30 rounded-lg">
+                                    <span className="text-slate-300">Energiklass</span>
+                                    <span className={`text-3xl font-bold ${brf.energy_class <= 'C' ? 'text-emerald-400' :
                                         brf.energy_class <= 'E' ? 'text-amber-400' :
                                             'text-red-400'
                                         }`}>{brf.energy_class}</span>
                                 </div>
                             )}
                             {brf.energy_kwh_per_sqm && (
-                                <div className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg">
-                                    <span className="text-slate-300">Energy Use</span>
-                                    <span className="text-slate-100 font-mono">{brf.energy_kwh_per_sqm} kWh/m²</span>
+                                <div className="flex items-center justify-between p-4 bg-slate-800/30 rounded-lg">
+                                    <span className="text-slate-300">Energiprestanda</span>
+                                    <span className="text-slate-100 font-mono text-xl">{brf.energy_kwh_per_sqm} <span className="text-sm text-slate-400">kWh/m²</span></span>
                                 </div>
                             )}
-                            {brf.heating_type && (
-                                <div className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg">
-                                    <div className="flex items-center gap-2">
-                                        <Thermometer className="w-4 h-4 text-orange-400" />
-                                        <span className="text-slate-300">Heating</span>
-                                    </div>
-                                    <span className="text-slate-100 capitalize">{brf.heating_type}</span>
+                            {brf.energy_declaration?.primary_energy_2020 && (
+                                <div className="flex items-center justify-between p-4 bg-slate-800/30 rounded-lg">
+                                    <span className="text-slate-300">Primärenergital</span>
+                                    <span className="text-slate-100 font-mono text-xl">{brf.energy_declaration.primary_energy_2020} <span className="text-sm text-slate-400">BBR 2020</span></span>
                                 </div>
                             )}
                         </div>
+
+                        {/* Building Info */}
+                        {brf.energy_declaration && (
+                            <div>
+                                <h4 className="text-sm font-medium text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                                    <Building2 className="w-4 h-4" />
+                                    Byggnadsinformation
+                                </h4>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    {brf.energy_declaration.heated_area_sqm && (
+                                        <div className="p-3 bg-slate-800/20 rounded-lg">
+                                            <div className="text-xs text-slate-500">Atemp</div>
+                                            <div className="text-slate-200 font-mono">{brf.energy_declaration.heated_area_sqm.toLocaleString()} m²</div>
+                                        </div>
+                                    )}
+                                    {brf.energy_declaration.num_apartments && (
+                                        <div className="p-3 bg-slate-800/20 rounded-lg">
+                                            <div className="text-xs text-slate-500">Lägenheter</div>
+                                            <div className="text-slate-200 font-mono">{brf.energy_declaration.num_apartments}</div>
+                                        </div>
+                                    )}
+                                    {brf.energy_declaration.construction_year && (
+                                        <div className="p-3 bg-slate-800/20 rounded-lg">
+                                            <div className="text-xs text-slate-500">Byggår</div>
+                                            <div className="text-slate-200 font-mono">{brf.energy_declaration.construction_year}</div>
+                                        </div>
+                                    )}
+                                    {brf.energy_declaration.building_type && (
+                                        <div className="p-3 bg-slate-800/20 rounded-lg">
+                                            <div className="text-xs text-slate-500">Byggnadstyp</div>
+                                            <div className="text-slate-200 text-sm">{brf.energy_declaration.building_type}</div>
+                                        </div>
+                                    )}
+                                    {brf.energy_declaration.ventilation_type && (
+                                        <div className="p-3 bg-slate-800/20 rounded-lg">
+                                            <div className="text-xs text-slate-500">Ventilation</div>
+                                            <div className="text-slate-200 text-sm">{brf.energy_declaration.ventilation_type}</div>
+                                        </div>
+                                    )}
+                                    {brf.energy_declaration.num_stairwells && (
+                                        <div className="p-3 bg-slate-800/20 rounded-lg">
+                                            <div className="text-xs text-slate-500">Trapphus</div>
+                                            <div className="text-slate-200 font-mono">{brf.energy_declaration.num_stairwells}</div>
+                                        </div>
+                                    )}
+                                    {brf.energy_declaration.basement_floors && (
+                                        <div className="p-3 bg-slate-800/20 rounded-lg">
+                                            <div className="text-xs text-slate-500">Källarplan</div>
+                                            <div className="text-slate-200 font-mono">{brf.energy_declaration.basement_floors}</div>
+                                        </div>
+                                    )}
+                                    {brf.energy_declaration.building_complexity && (
+                                        <div className="p-3 bg-slate-800/20 rounded-lg">
+                                            <div className="text-xs text-slate-500">Komplexitet</div>
+                                            <div className="text-slate-200 text-sm">{brf.energy_declaration.building_complexity}</div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Energy System */}
+                        {brf.energy_declaration && (brf.energy_declaration.district_heating_uppv || brf.energy_declaration.district_heating_vv || brf.energy_declaration.solar_kwh || brf.energy_declaration.heat_pump_ground) && (
+                            <div>
+                                <h4 className="text-sm font-medium text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                                    <Thermometer className="w-4 h-4" />
+                                    Energisystem (kWh/år)
+                                </h4>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    {brf.energy_declaration.district_heating_uppv && (
+                                        <div className="p-3 bg-orange-500/10 border border-orange-500/20 rounded-lg">
+                                            <div className="text-xs text-orange-400">Fjärrvärme (uppv)</div>
+                                            <div className="text-orange-300 font-mono">{brf.energy_declaration.district_heating_uppv.toLocaleString()}</div>
+                                        </div>
+                                    )}
+                                    {brf.energy_declaration.district_heating_vv && (
+                                        <div className="p-3 bg-orange-500/10 border border-orange-500/20 rounded-lg">
+                                            <div className="text-xs text-orange-400">Fjärrvärme (VV)</div>
+                                            <div className="text-orange-300 font-mono">{brf.energy_declaration.district_heating_vv.toLocaleString()}</div>
+                                        </div>
+                                    )}
+                                    {brf.energy_declaration.solar_kwh && (
+                                        <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
+                                            <div className="text-xs text-amber-400">Solenergi</div>
+                                            <div className="text-amber-300 font-mono">{brf.energy_declaration.solar_kwh.toLocaleString()}</div>
+                                        </div>
+                                    )}
+                                    {brf.energy_declaration.heat_pump_ground && (
+                                        <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+                                            <div className="text-xs text-green-400">Bergvärmepump</div>
+                                            <div className="text-green-300 font-mono">{brf.energy_declaration.heat_pump_ground.toLocaleString()}</div>
+                                        </div>
+                                    )}
+                                    {brf.energy_declaration.heat_pump_exhaust && (
+                                        <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+                                            <div className="text-xs text-green-400">Frånluftsvärmepump</div>
+                                            <div className="text-green-300 font-mono">{brf.energy_declaration.heat_pump_exhaust.toLocaleString()}</div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Heating Type Fallback */}
+                        {!brf.energy_declaration && brf.heating_type && (
+                            <div className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg">
+                                <div className="flex items-center gap-2">
+                                    <Thermometer className="w-4 h-4 text-orange-400" />
+                                    <span className="text-slate-300">Uppvärmning</span>
+                                </div>
+                                <span className="text-slate-100 capitalize">{brf.heating_type}</span>
+                            </div>
+                        )}
+
+                        {/* Recommended Measures */}
+                        {brf.recommended_measures && brf.recommended_measures.length > 0 && (
+                            <div>
+                                <h4 className="text-sm font-medium text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                                    <Wrench className="w-4 h-4" />
+                                    Rekommenderade Åtgärder ({brf.recommended_measures.length})
+                                </h4>
+                                <div className="space-y-2">
+                                    {brf.recommended_measures.map((measure, i) => {
+                                        const investmentColor = measure.investment_level === 'Låg' ? 'bg-green-500/20 text-green-400 border-green-500/30' :
+                                            measure.investment_level === 'Medel' ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' :
+                                                'bg-red-500/20 text-red-400 border-red-500/30';
+                                        return (
+                                            <div key={i} className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg">
+                                                <div>
+                                                    <div className="text-slate-200">{measure.measure_name}</div>
+                                                    {measure.estimated_energy_reduction_kwh && (
+                                                        <div className="text-xs text-slate-500">Besparing: {measure.estimated_energy_reduction_kwh.toLocaleString()} kWh/år</div>
+                                                    )}
+                                                </div>
+                                                <Badge className={`${investmentColor} border`}>
+                                                    {measure.investment_level === 'Låg' ? '🟢' : measure.investment_level === 'Medel' ? '🟡' : '🔴'} {measure.investment_level}
+                                                </Badge>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
                     </CardContent>
                 </Card>
             )}

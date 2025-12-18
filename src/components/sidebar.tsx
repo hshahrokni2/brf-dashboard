@@ -2,16 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Trophy, MapPin, TrendingUp, LineChart, Settings, LogOut, BarChart3, Building2 } from "lucide-react";
+import { Home, Trophy, MapPin, TrendingUp, LineChart, Settings, LogOut, BarChart3, Building2, Zap, Lightbulb, Calendar } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
     { href: "/", icon: Home, label: "Dashboard" },
     { href: "/rankings", icon: Trophy, label: "Rankings" },
-    { href: "/map", icon: MapPin, label: "Map" },
+    { href: "/energy", icon: Zap, label: "Energy" },
+    { href: "/measures", icon: Lightbulb, label: "Measures" },
+    { href: "/events", icon: Calendar, label: "Events" },
     { href: "/benchmarking", icon: TrendingUp, label: "Benchmarking" },
-    { href: "/timeline", icon: BarChart3, label: "Benchmarks" },
     { href: "/suppliers", icon: Building2, label: "Suppliers" },
+    { href: "/map", icon: MapPin, label: "Map" },
 ];
 
 export function Sidebar() {
