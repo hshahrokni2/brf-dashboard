@@ -14,7 +14,7 @@ export async function getBenchmarkData(
     // Map normalized categories to ILIKE patterns for flexible matching
     const categoryPatterns: Record<string, string[]> = {
         'Internet & Communications': ['%internet%', '%bredband%', '%tele%', '%fiber%', '%tv%', '%kommunikation%'],
-        'Waste Management': ['%sopor%', '%avfall%', '%waste%', '%renhållning%', '%återvinning%'],
+        'Waste Management': ['%soph%', '%sophan%', '%sopsug%', '%avfall%', '%renhålln%', '%återvin%', '%grovsop%'],
         'Cleaning': ['%städ%', '%clean%', '%trapp%'],
         'Electricity': ['%el%', '%elektr%', '%electricity%'],
         'Heating': ['%värme%', '%uppvärmning%', '%heat%', '%fjärrvärme%'],
