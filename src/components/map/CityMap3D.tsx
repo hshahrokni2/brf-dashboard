@@ -40,6 +40,7 @@ interface FilterState {
     lender: string[];
     supplier: string[];
     heatingType: string[];
+    measure: string[];
     district: string[];
 }
 
@@ -57,6 +58,7 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
         lender: [],
         supplier: [],
         heatingType: [],
+        measure: [],
         district: [],
     });
     const [showResults, setShowResults] = useState(false);
@@ -78,8 +80,12 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
         const heatingTypes = [...new Set(
             brfs.map(b => b.heating_type).filter(Boolean)
         )].sort() as string[];
+        // Get recommended measures
+        const measures = [...new Set(
+            brfs.flatMap(b => (b as any).recommended_measures || []).filter(Boolean)
+        )].sort() as string[];
         const districts = [...new Set(brfs.map(b => b.district).filter(Boolean))].sort();
-        return { energyClasses, ventilationTypes, lenders, suppliers, heatingTypes, districts };
+        return { energyClasses, ventilationTypes, lenders, suppliers, heatingTypes, measures, districts };
     }, [brfs]);
 
     // Build search index
@@ -130,6 +136,15 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
                 });
             }
         });
+        // Add recommended measures
+        filterOptions.measures.forEach(val => {
+            if (val.toLowerCase().includes(query)) {
+                results.push({
+                    value: val, category: "measure", categoryLabel: "Åtgärd",
+                    count: brfs.filter(b => (b as any).recommended_measures?.includes(val)).length
+                });
+            }
+        });
         filterOptions.districts.forEach(val => {
             if (val.toLowerCase().includes(query)) {
                 results.push({
@@ -138,7 +153,7 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
                 });
             }
         });
-        return results.sort((a, b) => b.count - a.count).slice(0, 8);
+        return results.sort((a, b) => b.count - a.count).slice(0, 10);
     }, [searchQuery, filterOptions, brfs]);
 
     // Check if a BRF matches current filters
@@ -158,6 +173,10 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
             if (!brf.top_suppliers?.some(s => activeFilters.supplier.includes(s.name))) return false;
         }
         if (activeFilters.heatingType.length > 0 && !activeFilters.heatingType.includes(brf.heating_type || '')) return false;
+        if (activeFilters.measure.length > 0) {
+            const brfMeasures = (brf as any).recommended_measures || [];
+            if (!activeFilters.measure.some(m => brfMeasures.includes(m))) return false;
+        }
         if (activeFilters.district.length > 0 && !activeFilters.district.includes(brf.district)) return false;
         return true;
     };
@@ -179,7 +198,7 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
     };
 
     const clearAllFilters = () => {
-        setActiveFilters({ energyClass: [], ventilationType: [], lender: [], supplier: [], heatingType: [], district: [] });
+        setActiveFilters({ energyClass: [], ventilationType: [], lender: [], supplier: [], heatingType: [], measure: [], district: [] });
         setSearchQuery("");
     };
 

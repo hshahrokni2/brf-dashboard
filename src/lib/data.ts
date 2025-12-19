@@ -142,7 +142,12 @@ export async function getBrfOverviewList() {
             ) ORDER BY h.data_year)
             FROM history_clean h
             WHERE h.zelda_id = m.zelda_id
-        ) as history
+        ) as history,
+        (
+            SELECT json_agg(DISTINCT rm.measure_type)
+            FROM brf_recommended_measures rm
+            WHERE rm.zelda_id = m.zelda_id
+        ) as recommended_measures
     FROM brf_metadata m
     JOIN brf_property p USING(zelda_id)
     LEFT JOIN brf_metrics met USING(zelda_id)
