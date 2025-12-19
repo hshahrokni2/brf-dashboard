@@ -120,7 +120,7 @@ export default async function SuppliersPage({ searchParams }: SuppliersPageProps
                     <DistrictFilter currentPath="/suppliers" />
                     <div className="flex flex-wrap gap-2">
                         <a
-                            href="/suppliers?type=all"
+                            href={`/suppliers?type=all${selectedDistrict ? `&district=${selectedDistrict}` : ''}`}
                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${selectedType === "all"
                                 ? "bg-sky-500 text-white"
                                 : "bg-slate-800 text-slate-300 hover:bg-slate-700"
@@ -131,7 +131,7 @@ export default async function SuppliersPage({ searchParams }: SuppliersPageProps
                         {Object.keys(categoryMap).map(category => (
                             <a
                                 key={category}
-                                href={`/suppliers?type=${categoryMap[category][0]}`}
+                                href={`/suppliers?type=${categoryMap[category][0]}${selectedDistrict ? `&district=${selectedDistrict}` : ''}`}
                                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${categoryMap[category].some(t => selectedType.toLowerCase().includes(t))
                                     ? "bg-emerald-500 text-white"
                                     : "bg-slate-800 text-slate-300 hover:bg-slate-700"
