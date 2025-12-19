@@ -85,6 +85,8 @@ export async function getBrfOverviewList() {
         g.chairman,
         g.board_size,
         p.total_apartments,
+        -- Get ventilation type from energy declarations
+        (SELECT ed.ventilation_type FROM brf_energy_declarations ed WHERE ed.zelda_id = m.zelda_id LIMIT 1) as ventilation_type,
         (SELECT description FROM brf_events e WHERE e.zelda_id = m.zelda_id ORDER BY year DESC LIMIT 1) as latest_event_description,
         (SELECT year FROM brf_events e WHERE e.zelda_id = m.zelda_id ORDER BY year DESC LIMIT 1) as latest_event_year,
         (
