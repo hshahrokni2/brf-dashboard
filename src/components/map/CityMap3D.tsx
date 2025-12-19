@@ -114,9 +114,10 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
             <Map
                 ref={mapRef}
                 initialViewState={{
-                    longitude: 18.0686,
-                    latitude: 59.3293,
-                    zoom: 13,
+                    // Center on Hammarby Sjöstad where most buildings are
+                    longitude: 18.098,
+                    latitude: 59.305,
+                    zoom: 14,
                     pitch: 60,
                     bearing: -20,
                 }}
