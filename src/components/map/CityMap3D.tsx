@@ -38,6 +38,8 @@ interface FilterState {
     energyClass: string[];
     ventilationType: string[];
     lender: string[];
+    supplier: string[];
+    heatingType: string[];
     district: string[];
 }
 
@@ -53,6 +55,8 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
         energyClass: [],
         ventilationType: [],
         lender: [],
+        supplier: [],
+        heatingType: [],
         district: [],
     });
     const [showResults, setShowResults] = useState(false);
@@ -66,8 +70,16 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
         const lenders = [...new Set(
             brfs.flatMap(b => b.loans?.map(l => l.lender).filter(Boolean) || [])
         )].sort();
+        // Get all suppliers from top_suppliers
+        const suppliers = [...new Set(
+            brfs.flatMap(b => b.top_suppliers?.map(s => s.name).filter(Boolean) || [])
+        )].sort();
+        // Get heating types
+        const heatingTypes = [...new Set(
+            brfs.map(b => b.heating_type).filter(Boolean)
+        )].sort() as string[];
         const districts = [...new Set(brfs.map(b => b.district).filter(Boolean))].sort();
-        return { energyClasses, ventilationTypes, lenders, districts };
+        return { energyClasses, ventilationTypes, lenders, suppliers, heatingTypes, districts };
     }, [brfs]);
 
     // Build search index
@@ -100,6 +112,24 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
                 });
             }
         });
+        // Add suppliers
+        filterOptions.suppliers.forEach(val => {
+            if (val.toLowerCase().includes(query)) {
+                results.push({
+                    value: val, category: "supplier", categoryLabel: "Supplier",
+                    count: brfs.filter(b => b.top_suppliers?.some(s => s.name === val)).length
+                });
+            }
+        });
+        // Add heating types
+        filterOptions.heatingTypes.forEach(val => {
+            if (val.toLowerCase().includes(query)) {
+                results.push({
+                    value: val, category: "heatingType", categoryLabel: "Värmekälla",
+                    count: brfs.filter(b => b.heating_type === val).length
+                });
+            }
+        });
         filterOptions.districts.forEach(val => {
             if (val.toLowerCase().includes(query)) {
                 results.push({
@@ -108,7 +138,7 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
                 });
             }
         });
-        return results.sort((a, b) => b.count - a.count).slice(0, 6);
+        return results.sort((a, b) => b.count - a.count).slice(0, 8);
     }, [searchQuery, filterOptions, brfs]);
 
     // Check if a BRF matches current filters
@@ -124,6 +154,10 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
         if (activeFilters.lender.length > 0) {
             if (!brf.loans?.some(l => activeFilters.lender.includes(l.lender))) return false;
         }
+        if (activeFilters.supplier.length > 0) {
+            if (!brf.top_suppliers?.some(s => activeFilters.supplier.includes(s.name))) return false;
+        }
+        if (activeFilters.heatingType.length > 0 && !activeFilters.heatingType.includes(brf.heating_type || '')) return false;
         if (activeFilters.district.length > 0 && !activeFilters.district.includes(brf.district)) return false;
         return true;
     };
@@ -145,7 +179,7 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
     };
 
     const clearAllFilters = () => {
-        setActiveFilters({ energyClass: [], ventilationType: [], lender: [], district: [] });
+        setActiveFilters({ energyClass: [], ventilationType: [], lender: [], supplier: [], heatingType: [], district: [] });
         setSearchQuery("");
     };
 
@@ -343,8 +377,8 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
                                             key={`${category}-${value}`}
                                             onClick={() => removeFilter(category as keyof FilterState, value)}
                                             className={`inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs transition-all group ${category === 'energyClass'
-                                                    ? `${ENERGY_BG_COLORS[value] || 'bg-slate-600'} text-white`
-                                                    : 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
+                                                ? `${ENERGY_BG_COLORS[value] || 'bg-slate-600'} text-white`
+                                                : 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
                                                 }`}
                                         >
                                             <span>{value}</span>
