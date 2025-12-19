@@ -232,6 +232,32 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
         }
     }, [searchParams, brfs]);
 
+    // Auto-fly to matching buildings when filter changes
+    useEffect(() => {
+        const hasFilters = Object.values(activeFilters).some(arr => arr.length > 0);
+        if (!hasFilters || !mapRef.current) return;
+
+        // Find matching BRFs with geometry
+        const matchingBrfs = brfs.filter(b => b.geometry && matchesBrf(b));
+        if (matchingBrfs.length === 0) return;
+
+        // Calculate center of matching buildings
+        const validCoords = matchingBrfs.filter(b => b.latitude && b.longitude);
+        if (validCoords.length === 0) return;
+
+        const avgLat = validCoords.reduce((sum, b) => sum + Number(b.latitude), 0) / validCoords.length;
+        const avgLon = validCoords.reduce((sum, b) => sum + Number(b.longitude), 0) / validCoords.length;
+
+        // Fly to center of filtered results
+        mapRef.current.flyTo({
+            center: [avgLon, avgLat],
+            zoom: matchingBrfs.length === 1 ? 17 : 14,
+            pitch: 60,
+            essential: true,
+            duration: 1500
+        });
+    }, [activeFilters]); // eslint-disable-line react-hooks/exhaustive-deps
+
     // Convert BRFs to GeoJSON - computed inline, not memoized
     const hasActiveFilters = Object.values(activeFilters).some(arr => arr.length > 0);
     const geojson = {
