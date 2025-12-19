@@ -110,7 +110,7 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
     }), [brfs, matchingIds]);
 
     return (
-        <div className="h-full w-full relative rounded-lg overflow-hidden bg-slate-900">
+        <div className="min-h-[600px] h-full w-full relative rounded-lg overflow-hidden bg-slate-900">
             <Map
                 ref={mapRef}
                 initialViewState={{
