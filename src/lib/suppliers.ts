@@ -42,21 +42,30 @@ function normalizeSupplierName(name: string): string {
 }
 
 // Get top suppliers across all service types - GROUPED BY COMPANY NAME with normalization
-export async function getTopSuppliers(limit: number = 20): Promise<SupplierData[]> {
+export async function getTopSuppliers(limit: number = 20, district?: string | null): Promise<SupplierData[]> {
+    const params: any[] = [];
+    let districtFilter = '';
+    if (district) {
+        params.push(district);
+        districtFilter = `AND m.district = $${params.length}`;
+    }
+
     const sql = `
         SELECT 
-            company_name,
-            STRING_AGG(DISTINCT service_type, ', ' ORDER BY service_type) as service_type,
-            COUNT(DISTINCT zelda_id) as brf_count,
+            s.company_name,
+            STRING_AGG(DISTINCT s.service_type, ', ' ORDER BY s.service_type) as service_type,
+            COUNT(DISTINCT s.zelda_id) as brf_count,
             (SELECT COUNT(DISTINCT zelda_id) FROM brf_suppliers) as total_brfs
-        FROM brf_suppliers
-        WHERE company_name IS NOT NULL
-        GROUP BY company_name
-        ORDER BY brf_count DESC, company_name
+        FROM brf_suppliers s
+        JOIN brf_metadata m ON s.zelda_id = m.zelda_id
+        WHERE s.company_name IS NOT NULL
+          ${districtFilter}
+        GROUP BY s.company_name
+        ORDER BY brf_count DESC, s.company_name
         LIMIT 100
     `;
 
-    const result = await query(sql, []);
+    const result = await query(sql, params);
 
     // Post-process to normalize and merge similar names
     const normalizedMap = new Map<string, SupplierData>();
@@ -92,25 +101,34 @@ export async function getTopSuppliers(limit: number = 20): Promise<SupplierData[
 }
 
 // Get suppliers by service type (word-start pattern matching)
-export async function getSuppliersByServiceType(serviceType: string): Promise<SupplierData[]> {
+export async function getSuppliersByServiceType(serviceType: string, district?: string | null): Promise<SupplierData[]> {
+    const params: any[] = [serviceType];
+    let districtFilter = '';
+    if (district) {
+        params.push(district);
+        districtFilter = `AND m.district = $${params.length}`;
+    }
+
     // Use word-start matching: finds 'el' in 'El' but not in 'Telecom'
     const sql = `
         SELECT 
-            company_name,
-            service_type,
-            COUNT(DISTINCT zelda_id) as brf_count
-        FROM brf_suppliers
+            s.company_name,
+            s.service_type,
+            COUNT(DISTINCT s.zelda_id) as brf_count
+        FROM brf_suppliers s
+        JOIN brf_metadata m ON s.zelda_id = m.zelda_id
         WHERE (
-            LOWER(service_type) = LOWER($1)
-            OR LOWER(service_type) LIKE LOWER($1) || ' %'
-            OR LOWER(service_type) LIKE LOWER($1) || '/%'
+            LOWER(s.service_type) = LOWER($1)
+            OR LOWER(s.service_type) LIKE LOWER($1) || ' %'
+            OR LOWER(s.service_type) LIKE LOWER($1) || '/%'
         )
-          AND company_name IS NOT NULL
-        GROUP BY company_name, service_type
+          AND s.company_name IS NOT NULL
+          ${districtFilter}
+        GROUP BY s.company_name, s.service_type
         ORDER BY brf_count DESC
     `;
 
-    const result = await query(sql, [serviceType]);
+    const result = await query(sql, params);
     return result.rows.map(row => ({
         company_name: row.company_name,
         service_type: row.service_type,
@@ -178,17 +196,26 @@ export async function getBrfsUsingSupplier(supplierName: string): Promise<Suppli
 }
 
 // Get supplier statistics
-export async function getSupplierStats() {
+export async function getSupplierStats(district?: string | null) {
+    const params: any[] = [];
+    let districtFilter = '';
+    if (district) {
+        params.push(district);
+        districtFilter = `AND m.district = $${params.length}`;
+    }
+
     const sql = `
         SELECT 
-            COUNT(DISTINCT company_name) as total_suppliers,
-            COUNT(DISTINCT zelda_id) as brfs_with_suppliers,
+            COUNT(DISTINCT s.company_name) as total_suppliers,
+            COUNT(DISTINCT s.zelda_id) as brfs_with_suppliers,
             COUNT(*) as total_records,
-            COUNT(DISTINCT service_type) as service_types
-        FROM brf_suppliers
-        WHERE company_name IS NOT NULL
+            COUNT(DISTINCT s.service_type) as service_types
+        FROM brf_suppliers s
+        JOIN brf_metadata m ON s.zelda_id = m.zelda_id
+        WHERE s.company_name IS NOT NULL
+          ${districtFilter}
     `;
 
-    const result = await query(sql, []);
+    const result = await query(sql, params);
     return result.rows[0];
 }

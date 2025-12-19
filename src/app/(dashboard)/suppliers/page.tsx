@@ -1,27 +1,29 @@
 import { getTopSuppliers, getSuppliersByServiceType, getServiceTypes, getSupplierStats } from "@/lib/suppliers";
+import { DistrictFilter } from "@/components/district-filter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building2, TrendingUp, Users, Package } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
 interface SuppliersPageProps {
-    searchParams: { type?: string };
+    searchParams: { type?: string; district?: string };
 }
 
 export default async function SuppliersPage({ searchParams }: SuppliersPageProps) {
     const selectedType = searchParams.type || "all";
+    const selectedDistrict = searchParams.district;
 
-    // Fetch data in parallel
+    // Fetch data in parallel with district filter
     const [topSuppliers, serviceTypes, stats] = await Promise.all([
-        getTopSuppliers(20),
+        getTopSuppliers(20, selectedDistrict),
         getServiceTypes(),
-        getSupplierStats()
+        getSupplierStats(selectedDistrict)
     ]);
 
     // Get suppliers for selected service type
     const filteredSuppliers = selectedType === "all"
         ? topSuppliers
-        : await getSuppliersByServiceType(selectedType);
+        : await getSuppliersByServiceType(selectedType, selectedDistrict);
 
     // Group service types into categories (using exact names from brf_suppliers.service_type)
     const categoryMap: Record<string, string[]> = {
@@ -112,9 +114,10 @@ export default async function SuppliersPage({ searchParams }: SuppliersPageProps
             {/* Service Type Tabs */}
             <Card className="bg-slate-900/50 border-slate-800">
                 <CardHeader>
-                    <CardTitle>Filter by Service Type</CardTitle>
+                    <CardTitle>Filters</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="space-y-4">
+                    <DistrictFilter currentPath="/suppliers" />
                     <div className="flex flex-wrap gap-2">
                         <a
                             href="/suppliers?type=all"
