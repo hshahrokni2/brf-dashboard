@@ -62,12 +62,7 @@ export async function getBrfOverviewList() {
         m.zelda_id,
         m.brf_name,
         p.property_designation,
-        CASE 
-            WHEN p.postal_code LIKE '120%' OR p.address ILIKE '%Hammarby%' OR p.address ILIKE '%Sickla%' THEN 'Hammarby Sjöstad'
-            WHEN p.postal_code LIKE '1154%' OR p.postal_code LIKE '1153%' OR p.address ILIKE '%Hjorthagen%' THEN 'Hjorthagen'
-            WHEN p.postal_code LIKE '1152%' OR p.address ILIKE '%Djurgårdsstaden%' THEN 'Norra Djurgårdsstaden'
-            ELSE 'Other'
-        END as district,
+        COALESCE(m.district, 'Other') as district,
         b.energy_class,
         b.energy_performance_kwh_sqm,
         met.solidarity_percent,
@@ -172,12 +167,7 @@ export async function searchBrfs(term: string) {
             m.brf_name,
             p.address,
             p.postal_code,
-            CASE 
-                WHEN p.postal_code LIKE '120%' THEN 'Hammarby Sjöstad'
-                WHEN p.postal_code LIKE '1154%' OR p.postal_code LIKE '1153%' THEN 'Hjorthagen'
-                WHEN p.postal_code LIKE '1152%' THEN 'Norra Djurgårdsstaden'
-                ELSE 'Other'
-            END as district
+            COALESCE(m.district, 'Other') as district
         FROM brf_metadata m
         JOIN brf_property p USING (zelda_id)
         WHERE 
