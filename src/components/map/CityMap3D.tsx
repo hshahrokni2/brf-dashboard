@@ -34,6 +34,28 @@ const ENERGY_BG_COLORS: Record<string, string> = {
     G: "bg-red-600",
 };
 
+// Translation from Boverket technical field names to readable Swedish
+const MEASURE_TRANSLATIONS: Record<string, string> = {
+    "AtgForslagByteVarmepump": "Byta värmepump",
+    "AtgForslagBegrTemp": "Sänka inomhustemperatur",
+    "AtgForslagAnnanInst": "Annan installation",
+    "AtgForslagAnnanVarme": "Annan värmeåtgärd",
+    "AtgForslagAnnanVent": "Annan ventilationsåtgärd",
+    "AtgForslagBehovstyrVent": "Behovsstyrd ventilation",
+    "AtgForslagInstSolceller": "Installera solceller",
+    "AtgForslagJustVarme": "Justera värmesystem",
+    "AtgForslagNyVentil": "Nytt ventilationssystem",
+    "AtgForslagEffektivBelys": "Effektivare belysning",
+    "AtgForslagIsolTak": "Tilläggsisolera tak",
+    "AtgForslagNyGivare": "Nya temperaturgivare",
+    "AtgForslagStyrVarme": "Styra värmesystem",
+    "AtgForslagTidstyrVent": "Tidsstyrd ventilation",
+    "AtgForslagIsolFasad": "Tilläggsisolera fasad",
+    "AtgForslagByteFonster": "Byta fönster",
+    "AtgForslagIsolVind": "Tilläggsisolera vind",
+    "AtgForslagFTXVent": "Installera FTX-ventilation",
+};
+
 interface FilterState {
     energyClass: string[];
     ventilationType: string[];
@@ -136,13 +158,16 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
                 });
             }
         });
-        // Add recommended measures
+        // Add recommended measures - search by both technical name and translation
         filterOptions.measures.forEach(val => {
-            if (val.toLowerCase().includes(query)) {
+            const translated = MEASURE_TRANSLATIONS[val] || val;
+            if (val.toLowerCase().includes(query) || translated.toLowerCase().includes(query)) {
                 results.push({
                     value: val, category: "measure", categoryLabel: "Åtgärd",
-                    count: brfs.filter(b => (b as any).recommended_measures?.includes(val)).length
-                });
+                    count: brfs.filter(b => (b as any).recommended_measures?.includes(val)).length,
+                    // Add displayValue for UI (use translated name)
+                    displayValue: translated,
+                } as any);
             }
         });
         filterOptions.districts.forEach(val => {
@@ -395,7 +420,7 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
                                         className={`w-full px-3 py-2 flex items-center gap-3 hover:bg-slate-700 text-left ${i === 0 ? 'bg-slate-700/50' : ''}`}
                                     >
                                         <div className="flex-1 min-w-0">
-                                            <div className="text-sm text-slate-100 truncate">{result.value}</div>
+                                            <div className="text-sm text-slate-100 truncate">{(result as any).displayValue || result.value}</div>
                                             <div className="text-xs text-slate-400">{result.categoryLabel}</div>
                                         </div>
                                         <Badge className="bg-slate-600 text-slate-300 text-xs">{result.count}</Badge>
@@ -417,19 +442,23 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
                             </div>
                             <div className="flex flex-wrap gap-1.5">
                                 {Object.entries(activeFilters).map(([category, values]) =>
-                                    values.map((value: string) => (
-                                        <button
-                                            key={`${category}-${value}`}
-                                            onClick={() => removeFilter(category as keyof FilterState, value)}
-                                            className={`inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs transition-all group ${category === 'energyClass'
-                                                ? `${ENERGY_BG_COLORS[value] || 'bg-slate-600'} text-white`
-                                                : 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
-                                                }`}
-                                        >
-                                            <span>{value}</span>
-                                            <X className="w-3 h-3 opacity-60 group-hover:opacity-100" />
-                                        </button>
-                                    ))
+                                    values.map((value: string) => {
+                                        // Translate measure values for display
+                                        const displayVal = category === 'measure' ? (MEASURE_TRANSLATIONS[value] || value) : value;
+                                        return (
+                                            <button
+                                                key={`${category}-${value}`}
+                                                onClick={() => removeFilter(category as keyof FilterState, value)}
+                                                className={`inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs transition-all group ${category === 'energyClass'
+                                                    ? `${ENERGY_BG_COLORS[value] || 'bg-slate-600'} text-white`
+                                                    : 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
+                                                    }`}
+                                            >
+                                                <span>{displayVal}</span>
+                                                <X className="w-3 h-3 opacity-60 group-hover:opacity-100" />
+                                            </button>
+                                        );
+                                    })
                                 )}
                             </div>
                         </div>
