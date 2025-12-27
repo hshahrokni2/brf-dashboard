@@ -293,20 +293,27 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
                 const isMatching = matchesBrf(b);
                 let geometry = b.geometry;
 
-                // If missing geometry but has lat/lon, create a small placeholder square (approx 10x10m)
+                // If missing geometry but has lat/lon, create an octagonal placeholder (cylinder-like)
                 if (!geometry && b.latitude && b.longitude) {
                     const lat = parseFloat(b.latitude);
                     const lon = parseFloat(b.longitude);
-                    const offset = 0.00015; // roughly 15 meters
+                    // Create octagon (8 points) to approximate a cylinder
+                    const radius = 0.0002; // Roughly 20m
+                    const points = 8;
+                    const coords = [];
+                    for (let i = 0; i < points; i++) {
+                        const angle = (i * 360) / points;
+                        const rad = (angle * Math.PI) / 180;
+                        // Adjust longitude for latitude (mercator-ish approximation for small scale)
+                        const x = lon + (radius * Math.cos(rad)) / Math.cos(lat * Math.PI / 180);
+                        const y = lat + (radius * Math.sin(rad));
+                        coords.push([x, y]);
+                    }
+                    coords.push(coords[0]); // Close polygon
+
                     geometry = {
                         type: "Polygon",
-                        coordinates: [[
-                            [lon - offset, lat - offset],
-                            [lon + offset, lat - offset],
-                            [lon + offset, lat + offset],
-                            [lon - offset, lat + offset],
-                            [lon - offset, lat - offset]
-                        ]]
+                        coordinates: [coords]
                     };
                 }
 
@@ -315,12 +322,12 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
                     geometry: geometry,
                     properties: {
                         ...b,
-                        height: b.height_m ? Number(b.height_m) : 20,
+                        height: b.height_m ? Number(b.height_m) : 25, // Slightly taller for markers
                         color: (hasActiveFilters && !isMatching)
                             ? GRAYED_OUT_COLOR
                             : (ENERGY_COLORS[b.energy_class] || ENERGY_COLORS.Unknown),
                         isMatching,
-                        isPlaceholder: !b.geometry // Flag to potentially style differently
+                        isPlaceholder: !b.geometry
                     },
                 };
             }),
