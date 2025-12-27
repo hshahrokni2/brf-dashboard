@@ -414,7 +414,14 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
                         <h1 className="text-lg font-bold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">
                             3D City Explorer
                         </h1>
-                        <p className="text-xs text-slate-400">{brfs.length} Properties • Smart Search</p>
+                        <div className="flex flex-col gap-0.5">
+                            <p className="text-xs text-slate-400">{geojson.features.length} of {brfs.length} Properties Visible</p>
+                            {brfs.length - geojson.features.length > 0 && (
+                                <p className="text-[10px] text-amber-500/80">
+                                    {brfs.length - geojson.features.length} hidden (missing coordinates)
+                                </p>
+                            )}
+                        </div>
                     </div>
 
                     {/* Search Input */}
