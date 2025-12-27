@@ -288,12 +288,31 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
     const geojson = {
         type: "FeatureCollection",
         features: (brfs as any[])
-            .filter((b) => b.geometry)
+            .filter((b) => b.geometry || (b.latitude && b.longitude))
             .map((b) => {
                 const isMatching = matchesBrf(b);
+                let geometry = b.geometry;
+
+                // If missing geometry but has lat/lon, create a small placeholder square (approx 10x10m)
+                if (!geometry && b.latitude && b.longitude) {
+                    const lat = parseFloat(b.latitude);
+                    const lon = parseFloat(b.longitude);
+                    const offset = 0.00015; // roughly 15 meters
+                    geometry = {
+                        type: "Polygon",
+                        coordinates: [[
+                            [lon - offset, lat - offset],
+                            [lon + offset, lat - offset],
+                            [lon + offset, lat + offset],
+                            [lon - offset, lat + offset],
+                            [lon - offset, lat - offset]
+                        ]]
+                    };
+                }
+
                 return {
                     type: "Feature",
-                    geometry: b.geometry,
+                    geometry: geometry,
                     properties: {
                         ...b,
                         height: b.height_m ? Number(b.height_m) : 20,
@@ -301,6 +320,7 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
                             ? GRAYED_OUT_COLOR
                             : (ENERGY_COLORS[b.energy_class] || ENERGY_COLORS.Unknown),
                         isMatching,
+                        isPlaceholder: !b.geometry // Flag to potentially style differently
                     },
                 };
             }),
