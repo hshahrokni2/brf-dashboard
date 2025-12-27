@@ -262,8 +262,8 @@ export default function CityMap3D({ brfs }: { brfs: BrfOverview[] }) {
         const hasFilters = Object.values(activeFilters).some(arr => arr.length > 0);
         if (!hasFilters || !mapRef.current) return;
 
-        // Find matching BRFs with geometry
-        const matchingBrfs = (brfs as any[]).filter(b => b.geometry && matchesBrf(b));
+        // Find matching BRFs with geometry OR coordinates
+        const matchingBrfs = (brfs as any[]).filter(b => (b.geometry || (b.latitude && b.longitude)) && matchesBrf(b));
         if (matchingBrfs.length === 0) return;
 
         // Calculate center of matching buildings
